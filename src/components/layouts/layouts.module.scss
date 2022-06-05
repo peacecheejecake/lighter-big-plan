@@ -1,0 +1,14 @@
+@use 'styles/constants/colors';
+
+.mainWrapper {
+  display: flex;
+  height: 100vh;
+
+  main {
+    position: relative;
+    top: 80px;
+    min-width: calc(100% - 280px);
+    max-width: 100%;
+    padding: 0 20px;
+  }
+}

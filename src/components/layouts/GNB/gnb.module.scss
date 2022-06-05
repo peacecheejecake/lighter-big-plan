@@ -1,0 +1,32 @@
+@use 'styles/constants/colors';
+@use 'styles/constants/levels';
+
+.gnbWrapper {
+  position: fixed;
+  z-index: levels.$GNB;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  height: 80px;
+  padding-right: 40px;
+  padding-left: 10px;
+  overflow: hidden;
+  background-color: colors.$WHITE;
+  border-bottom: 1px solid colors.$GRAY5;
+
+  .leftWing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .logo {
+      position: relative;
+    }
+  }
+
+  // .rightWing {
+  //   .hello {
+  //   }
+  // }
+}

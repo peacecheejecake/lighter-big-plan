@@ -1,0 +1,12 @@
+@use 'styles/constants/colors';
+@import 'styles/global';
+
+.appWrapper {
+  width: 100vw;
+  background-color: colors.$GRAY2;
+
+  .app {
+    position: relative;
+    width: 100%;
+  }
+}

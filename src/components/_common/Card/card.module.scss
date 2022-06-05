@@ -1,0 +1,9 @@
+@use 'styles/constants/colors';
+
+.card {
+  padding: 30px;
+  margin: 20px;
+  background-color: colors.$WHITE;
+  border: 1px solid colors.$GRAY5;
+  border-radius: 30px;
+}
