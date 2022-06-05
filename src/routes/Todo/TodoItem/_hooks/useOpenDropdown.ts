@@ -19,7 +19,7 @@ export const useOpenDropdown = <T extends HTMLElement>() => {
 
     return () => {
       document.removeEventListener('click', handleClickOuterBound);
-      window.removeEventListener('blue', handleBlurWindow);
+      window.removeEventListener('blur', handleBlurWindow);
     };
   }, []);
 

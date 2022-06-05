@@ -2,7 +2,7 @@
 
 .mainWrapper {
   display: flex;
-  height: 100vh;
+  min-height: calc(100vh - 20px);
 
   main {
     position: relative;

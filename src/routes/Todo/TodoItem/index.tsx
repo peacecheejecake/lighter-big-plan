@@ -3,11 +3,13 @@ import { useSetRecoilState } from 'recoil';
 import cx from 'classnames';
 import { CheckIcon } from 'assets/svgs';
 import { itemList } from 'store/atoms/itemList';
+import { editingItem } from 'store/atoms/editingItem';
 import ItemOptionBar from './_components/ItemOptionBar';
 import styles from './todoItem.module.scss';
 
 export default function TodoItem({ item, selectedId, setSelectedId, add = false }: TodoItemProps) {
   const setItems = useSetRecoilState(itemList);
+  const setEditingItem = useSetRecoilState(editingItem);
 
   const [isSelected, setIsSelected] = useState(false);
   const [isEditing, setIsEditing] = useState(add);
@@ -75,6 +77,7 @@ export default function TodoItem({ item, selectedId, setSelectedId, add = false 
 
   const handleDoubleClickTitle = () => {
     setIsEditing(true);
+    setEditingItem({ ...item });
   };
 
   const handleChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {

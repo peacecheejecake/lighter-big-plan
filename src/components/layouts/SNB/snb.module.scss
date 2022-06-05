@@ -3,6 +3,7 @@
 
 .snbWrapper {
   width: 280px;
+  min-height: calc(100vh - 20px);
   background-color: colors.$WHITE;
   border-right: 1px solid colors.$GRAY5;
 }

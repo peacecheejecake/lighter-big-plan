@@ -1,16 +1,18 @@
-import { useState, useEffect, useRef, RefObject } from 'react';
-import type { KeyboardEvent, MouseEvent, FormEvent, Dispatch, SetStateAction } from 'react';
-import { useRecoilState } from 'recoil';
+import { useState, useEffect, useRef } from 'react';
+import { useSetRecoilState, useRecoilState } from 'recoil';
 import cx from 'classnames';
 
+import type { KeyboardEvent, FormEvent, Dispatch, SetStateAction } from 'react';
+
 import { AddIcon } from 'assets/svgs';
+import { colors } from 'store/constants';
 import { categoryList } from 'store/atoms/categoryList';
 import { editingItem } from 'store/atoms/editingItem';
 import ColorIndicator from './ColorIndicator';
 import styles from './categoryMenu.module.scss';
 
-export default function CategoryMenu({ setIsOpen, containerRef }: CategoryMenuProps) {
-  const [item, setItem] = useRecoilState(editingItem);
+export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
+  const setItem = useSetRecoilState(editingItem);
   const [categories, setCategories] = useRecoilState(categoryList);
   const [topIdx, setTopIdx] = useState(0);
   const [inputValue, setInputValue] = useState('');
@@ -27,7 +29,7 @@ export default function CategoryMenu({ setIsOpen, containerRef }: CategoryMenuPr
     setIsOpen(false);
   };
 
-  const handleClickAddMenu = (e: MouseEvent<HTMLDivElement>) => {
+  const handleClickAddMenu = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!inputRef.current || e.currentTarget.contains(document.activeElement)) return;
     inputRef.current.focus();
   };
@@ -52,7 +54,7 @@ export default function CategoryMenu({ setIsOpen, containerRef }: CategoryMenuPr
   };
 
   return (
-    <ul className={styles.dropMenu} ref={containerRef}>
+    <ul className={styles.dropMenu}>
       {[...categories.slice(0, topIdx), ...categories.slice(topIdx + 1)].map(({ color, name }, idx) => {
         const key = `className-${name}-${idx}`;
         return (
@@ -100,29 +102,8 @@ export default function CategoryMenu({ setIsOpen, containerRef }: CategoryMenuPr
       </li>
     </ul>
   );
-
-  // return (
-  //   <div className={cx(styles.wrapper, className, { [styles.largerWrapper]: larger })} ref={outerRef}>
-  //     <div
-  //       className={cx(styles.currentItemWrapper, {
-  //         [styles.highlightHover]: !isOpen,
-  //       })}
-  //       onClick={toggleIsOpen}
-  //       role="button"
-  //       tabIndex={-1}
-  //     >
-  //       <div className={styles.item}>
-  //         {dropItemsToRender[topIdx].color && <ColorIndicator color={dropItemsToRender[topIdx].color as string} />}
-  //         <p className={styles.title}>{dropItemsToRender[topIdx].title}</p>
-  //       </div>
-  //       <ShowMoreIcon isOpen={isOpen} className={styles.dropIcon} />
-  //     </div>
-  //     {isOpen && dropMenu}
-  //   </div>
-  // );
 }
 
 interface CategoryMenuProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  containerRef: RefObject<HTMLUListElement>;
 }
