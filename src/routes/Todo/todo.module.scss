@@ -1,10 +1,28 @@
+@use 'styles/constants/colors';
+
 .quickTodo {
   width: 90%;
+  max-height: calc(100vh - 180px);
   margin: 40px;
+  overflow: scroll;
 
   .title {
-    margin-top: 20px;
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 30px;
     font-size: 24px;
     font-weight: 700;
+  }
+
+  .addIcon {
+    cursor: pointer;
+    border-radius: 5px;
+    fill: colors.$GRAY9;
+    transform: scale(50%);
+    transform-origin: bottom;
+
+    &:hover {
+      background-color: colors.$GRAY1;
+    }
   }
 }

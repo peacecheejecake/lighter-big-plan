@@ -5,8 +5,8 @@ interface Item {
   createdAt: Dayjs;
   updatedAt: Dayjs;
   categoryId: number;
-  startDate?: Dayjs;
-  endDate?: Dayjs;
+  start?: Dayjs;
+  end?: Dayjs;
   done: boolean;
 }
 

@@ -1,0 +1,145 @@
+@use 'styles/constants/colors';
+@use 'styles/constants/levels';
+@use 'styles/mixins/flexbox';
+
+.wrapper {
+  position: relative;
+  width: 262px;
+  height: 24px;
+  min-height: 20px;
+  margin-right: 46px;
+  @include flexbox.flexbox(center, center);
+
+  .currentDate {
+    display: flex;
+    align-items: center;
+
+    .currentDateText {
+      margin-right: 16px;
+      font-size: 12px; 
+      font-weight: 500;
+      line-height: 16px;
+      text-align: right;
+      white-space: nowrap;
+      user-select: none;
+    }
+
+    .dropIcon {
+      position: relative;
+    }
+  }
+
+  .calenderWrapper {
+    position: absolute;
+    right: 25px;
+    bottom: -260px;
+    z-index: levels.$DROPDOWN;
+    width: 235px;
+    height: 245px;
+    background-color: colors.$BG_W;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(colors.$BLACK, 4%);
+
+    .month {
+      @include flexbox.horizontal(around, center);
+      width: 100px;
+      padding: 0 5px;
+      margin: 20px auto;
+      font-size: 16px;
+
+      button[type='button'] {
+        width: 20px;
+        height: 20px;
+        border-radius: 5px;
+
+        &:hover {
+          background-color: colors.$BG_G;
+        }
+      }
+
+      .toLeft {
+        transform: rotate(90deg);
+      }
+
+      .toRight {
+        transform: rotate(-90deg);
+      }
+
+      .monthText {
+        width: 100px;
+        height: 100%;
+        margin: auto 0;
+        font-weight: 700;
+        line-height: 100%;
+        text-align: center;
+        cursor: pointer;
+        border-radius: 5px;
+
+        &:focus {
+          border: 1px solid;
+        }
+      }
+    }
+
+    .dates {
+      display: grid;
+      grid-template-rows: repeat(5, 1fr);
+      grid-template-columns: repeat(7, 1fr);
+      gap: 7px 5px;
+      width: 90%;
+      height: 165px;
+      margin: 10px auto;
+
+      .date {
+        @include flexbox.flexbox;
+        width: 100%;
+        height: 100%;
+        font-size: 12px;
+        font-weight: 500;
+        cursor: pointer;
+        border-radius: 50%;
+        transition: 150ms;
+
+        &:hover {
+          background-color: colors.$GREY_50;
+        }
+      }
+
+      .tail {
+        color: colors.$GREY_300;
+      }
+
+      .start {
+        color: colors.$WHITE;
+        background-color: colors.$PRIMARY;
+
+        &:hover {
+          background-color: colors.$PRIMARY;
+        }
+      }
+
+      .end {
+        color: colors.$WHITE;
+        background-color: colors.$ERROR;
+
+        &:hover {
+          background-color: colors.$ERROR;
+        }
+      }
+
+      .noData {
+        color: colors.$GREY_50;
+        cursor: auto;
+
+        &:hover {
+          background-color: colors.$BG_W;
+        }
+      }
+
+      .inDuration {
+        color: colors.$GREY_800;
+        background-color: colors.$GREY_50;
+      }
+    }
+  }
+}

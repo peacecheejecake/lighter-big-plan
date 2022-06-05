@@ -10,8 +10,19 @@ const dummy: Item[] = [
     createdAt: dayjs('2022-01-05'),
     updatedAt: dayjs('2022-05-27'),
     categoryId: 0,
-    startDate: dayjs('2022-05-27'),
-    endDate: dayjs('2022-06-05'),
+    start: dayjs('2022-05-27'),
+    end: dayjs('2022-06-05'),
+  },
+  {
+    id: 1,
+    done: false,
+    title: '영화보기',
+    notes: '',
+    createdAt: dayjs('2022-01-05'),
+    updatedAt: dayjs('2022-05-27'),
+    categoryId: 0,
+    start: dayjs('2022-05-27'),
+    end: dayjs('2022-06-05'),
   },
 ];
 

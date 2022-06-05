@@ -1,4 +1,5 @@
 import { atom } from 'recoil';
+import { colors } from 'store/constants';
 
 const dummy: Category[] = [
   {
