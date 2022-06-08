@@ -19,17 +19,6 @@ export default function TodoItem({ item, selectedId, setSelectedId, add = false 
   const liRef = useRef<HTMLLIElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
 
-  // const updateItem = useCallback((keys: (keyof Item)[]) => {
-  //   setItems((prev) =>
-  //     prev.map((listItem) => {
-  //       if (item.id === listItem.id) {
-  //         return { ...listItem, done: event.currentTarget.checked };
-  //       }
-  //       return listItem;
-  //     })
-  //   );
-  // }, [])
-
   useEffect(() => {
     const handleClickOuter = (event: MouseEvent) => {
       if (!liRef.current || !event.target || liRef.current.contains(event.target as Node)) return;
@@ -43,21 +32,9 @@ export default function TodoItem({ item, selectedId, setSelectedId, add = false 
     };
 
     document.addEventListener('click', handleClickOuter);
+
     return () => document.removeEventListener('click', handleClickOuter);
   }, [item.id, selectedId, setSelectedId]);
-
-  // useEffect(() => {
-  //   if (!isEditing) {
-  //     setItems((prev) => prev.map((listItem) => {
-  //       prev.map((listItem) => {
-  //         if (item.id === listItem.id) {
-  //           return { ...listItem, done: event.currentTarget.checked };
-  //         }
-  //         return listItem;
-  //       })
-  //     })
-  //   }
-  // }, [isEditing])
 
   useEffect(() => {
     if (isEditing && titleRef.current) {

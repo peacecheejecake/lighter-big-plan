@@ -3,7 +3,7 @@
 .todoItem {
   width: 100%;
   height: 36px;
-  padding: 8px 15px;
+  padding: 0 15px;
   margin-top: 4px;
   line-height: 36px;
   border-radius: 8px;
@@ -11,14 +11,16 @@
 
   form {
     display: flex;
+    align-items: center;
 
     .checkmark {
+      position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
       width: 16px;
       height: 16px;
-      margin-right: 13px;
+      margin-right: 10px;
       cursor: pointer;
       border: 1px solid colors.$GRAY4;
       border-radius: 3px;
@@ -58,8 +60,12 @@
       width: 100%;
 
       .title {
+        padding: 0 5px;
+        line-height: 36px;
         cursor: pointer;
-        user-select: none;
+        user-select: unset;
+        border-radius: 3px;
+        transition: 150ms;
 
         &::selection {
           all: unset;
@@ -75,6 +81,14 @@
           color: colors.$GRAY0;
           background-color: colors.$GRAY9;
         }
+
+        &:focus {
+          background-color: colors.$WHITE;
+        }
+
+        &:not(:focus) {
+          background-color: transparent;
+        }
       }
     }
   }
@@ -89,19 +103,35 @@
 }
 
 .editor {
-  height: 160px;
+  min-height: 190px;
   padding: 16px;
   margin: 30px 0 25px;
   background-color: rgba(colors.$GRAY9, 4%);
 
-  .open {
-    cursor: auto;
+  form {
+    align-items: baseline;
 
-    .notes {
-      all: unset;
-      height: 78px;
-      margin-top: 5px;
-      overflow-y: scroll;
+    .checkmark {
+      top: 4px;
+    }
+
+    .open {
+      cursor: auto;
+
+      textarea {
+        all: unset;
+        padding: 0 10px;
+        margin: 5px 0 10px;
+        overflow-y: scroll;
+        text-overflow: clip;
+        border-radius: 3px;
+        transition: 150ms;
+
+        &:focus {
+          padding-left: 0 10px;
+          background-color: colors.$WHITE;
+        }
+      }
     }
   }
 }

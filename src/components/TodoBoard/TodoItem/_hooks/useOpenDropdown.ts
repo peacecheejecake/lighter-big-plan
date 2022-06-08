@@ -1,27 +1,30 @@
+import { useClickOuter } from 'hooks/useClickOuter';
 import { useEffect, useRef, useState } from 'react';
 
 export const useOpenDropdown = <T extends HTMLElement>() => {
-  const [isOpen, setIsOpen] = useState(false);
-  const containerRef = useRef<T>(null);
+  // const [isOpen, setIsOpen] = useState(false);
+  // const containerRef = useRef<T>(null);
 
-  useEffect(() => {
-    const handleClickOuterBound = (e: MouseEvent) => {
-      if (!containerRef.current?.contains(e.target as Node)) {
-        setIsOpen(false);
-      }
-    };
-    const handleBlurWindow = () => {
-      setIsOpen(false);
-    };
+  // useEffect(() => {
+  //   const handleClickOuterBound = (e: MouseEvent) => {
+  //     if (!containerRef.current?.contains(e.target as Node)) {
+  //       setIsOpen(false);
+  //     }
+  //   };
+  //   const handleBlurWindow = () => {
+  //     setIsOpen(false);
+  //   };
 
-    document.addEventListener('click', handleClickOuterBound);
-    window.addEventListener('blur', handleBlurWindow);
+  //   document.addEventListener('click', handleClickOuterBound);
+  //   window.addEventListener('blur', handleBlurWindow);
 
-    return () => {
-      document.removeEventListener('click', handleClickOuterBound);
-      window.removeEventListener('blur', handleBlurWindow);
-    };
-  }, []);
+  //   return () => {
+  //     document.removeEventListener('click', handleClickOuterBound);
+  //     window.removeEventListener('blur', handleBlurWindow);
+  //   };
+  // }, []);
+
+  const [isOpen, setIsOpen, containerRef] = useClickOuter();
 
   const toggleIsOpen = () => {
     setIsOpen((prev) => !prev);

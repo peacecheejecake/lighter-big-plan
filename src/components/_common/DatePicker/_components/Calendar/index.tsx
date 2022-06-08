@@ -3,18 +3,19 @@ import { useRecoilState } from 'recoil';
 import cx from 'classnames';
 import dayjs from 'dayjs';
 
-import type { KeyboardEvent, FormEvent, MouseEvent } from 'react';
+import type { KeyboardEvent, FormEvent, MouseEvent, Dispatch, SetStateAction } from 'react';
 import type { Dayjs } from 'dayjs';
 
 import { DropIcon } from 'assets/svgs';
 import { editingItem } from 'store/atoms/editingItem';
-import { useCalendarBounds } from '../../_hooks/useCalendarBounds';
+import { useCalendarBounds } from 'hooks/useCalendarBounds';
 
-import { toDateString, toYearMonth } from '../../_utils';
-import styles from './datePicker.module.scss';
+import { toYearMonth } from 'services/date';
+import styles from './calendar.module.scss';
 
-export default function DatePicker() {
+export default function Calendar({ setIsOpen }: DatePickerProps) {
   const [item, setItem] = useRecoilState(editingItem);
+
   const [value, setValue] = useState(toYearMonth((item as Item).start));
   const [selectedStart, setSelectedStart] = useState<Dayjs | null>(null);
   const [selectedEnd, setSelectedEnd] = useState<Dayjs | null>(null);
@@ -59,7 +60,7 @@ export default function DatePicker() {
   const handleClickDate = (e: MouseEvent<HTMLButtonElement>) => {
     const dayOnClick = firstDayInCalendar.add(Number(e.currentTarget.dataset.idx), 'day');
 
-    if (dayOnClick < dayjs('2022-02-01') && dayOnClick > dayjs('2022-04-22')) return;
+    // if (dayOnClick < dayjs('2022-02-01') && dayOnClick > dayjs('2022-04-22')) return;
 
     if ((selectedStart === null && selectedEnd === null) || (selectedStart && selectedEnd)) {
       setSelectedStart(dayOnClick);
@@ -67,12 +68,14 @@ export default function DatePicker() {
     } else if (selectedStart && selectedEnd === null) {
       if (dayOnClick > selectedStart) {
         setSelectedEnd(dayOnClick);
-        setItem((prev) => ({ ...(prev as Item), start: toDateString(selectedStart), end: toDateString(dayOnClick) }));
+        setItem((prev) => ({ ...(prev as Item), start: selectedStart, end: dayOnClick }));
       } else if (dayOnClick < selectedStart) {
         setSelectedEnd(selectedStart);
         setSelectedStart(dayOnClick);
-        setItem((prev) => ({ ...(prev as Item), start: toDateString(selectedStart), end: toDateString(dayOnClick) }));
+        setItem((prev) => ({ ...(prev as Item), start: selectedStart, end: dayOnClick }));
       }
+
+      setIsOpen(false);
     }
   };
 
@@ -117,4 +120,8 @@ export default function DatePicker() {
       </div>
     </div>
   );
+}
+
+interface DatePickerProps {
+  setIsOpen: Dispatch<SetStateAction<boolean>>;
 }

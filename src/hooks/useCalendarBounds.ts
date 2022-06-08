@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import dayjs from 'dayjs';
 import type { Dayjs } from 'dayjs';
-import { getCalendarBoundsFromDate } from '../_utils';
+import { getCalendarBoundsFromDate } from 'services/date';
 
 export const useCalendarBounds = (date: string | Dayjs) => {
   const [firstDayOfCurrentMonth, setFirstDayOfCurrentMonth] = useState(dayjs(date));
