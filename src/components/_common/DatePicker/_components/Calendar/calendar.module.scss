@@ -6,13 +6,15 @@
 
 .calenderWrapper {
   position: absolute;
+  top: 0;
   z-index: levels.$DROPDOWN;
   width: 235px;
   height: 245px;
   background-color: colors.$BG_W;
   border-radius: 20px;
   box-shadow: 0 2px 10px rgba(colors.$BLACK, 4%);
-  animation: 150ms fadeIn;
+  transform-origin: top left;
+  animation: 150ms expand;
 
   .month {
     @include flexbox.horizontal(around, center);
@@ -114,5 +116,15 @@
       color: colors.$GREY_800;
       background-color: colors.$GREY_50;
     }
+  }
+}
+
+@keyframes expand {
+  from {
+    transform: scale(0);
+  }
+
+  to {
+    transform: scale(1);
   }
 }
