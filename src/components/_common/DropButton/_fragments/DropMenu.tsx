@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, RefObject } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useSetRecoilState, useRecoilState } from 'recoil';
 import cx from 'classnames';
 
@@ -9,9 +9,9 @@ import { colors } from 'store/constants';
 import { categoryList } from 'store/atoms/categoryList';
 import { editingItem } from 'store/atoms/editingItem';
 import ColorIndicator from './ColorIndicator';
-import styles from './categoryMenu.module.scss';
+import styles from '../dropButton.module.scss';
 
-export default function CategoryMenu({ setIsOpen, containerRef }: CategoryMenuProps) {
+export default function DropButton({ setIsOpen }: CategoryMenuProps) {
   const setItem = useSetRecoilState(editingItem);
   const [categories, setCategories] = useRecoilState(categoryList);
   const [topIdx, setTopIdx] = useState(0);
@@ -54,7 +54,7 @@ export default function CategoryMenu({ setIsOpen, containerRef }: CategoryMenuPr
   };
 
   return (
-    <ul className={styles.dropMenu} ref={containerRef}>
+    <ul className={styles.dropMenu}>
       {[...categories.slice(0, topIdx), ...categories.slice(topIdx + 1)].map(({ color, name }, idx) => {
         const key = `className-${name}-${idx}`;
         return (
@@ -106,5 +106,4 @@ export default function CategoryMenu({ setIsOpen, containerRef }: CategoryMenuPr
 
 interface CategoryMenuProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  containerRef: RefObject<HTMLUListElement>;
 }

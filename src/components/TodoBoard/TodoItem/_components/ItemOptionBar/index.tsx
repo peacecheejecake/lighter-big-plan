@@ -1,4 +1,3 @@
-import { useReducer, useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { CategoryIcon, CalendarIcon } from 'assets/svgs';
 import { editingItem } from 'store/atoms/editingItem';
@@ -9,26 +8,14 @@ import styles from './itemOptionBar.module.scss';
 // import CalendarButton from './_components/CalendarButton';
 
 export default function ItemOptionBar() {
-  // const [isCalendarOpen, toggleIsCalendarOpen] = useReducer((prev) => !prev, false);
-  // const [isCategoryOpen, setIsCategoryOpen] = useState(false);
-
-  const [isCalendarOpen, setIsCalendarOpen, calendarRef] = useClickOuter<HTMLDivElement>();
-  const [isCategoryOpen, setIsCategoryOpen, categoryRef] = useClickOuter();
-
+  const [isCategoryOpen, setIsCategoryOpen, categoryRef] = useClickOuter<HTMLUListElement>();
   const [item, setItem] = useRecoilState(editingItem);
 
   if (item === null) return null;
 
   const handleClickCategory = () => {
-    setIsCategoryOpen(true);
-  };
-
-  const handleClickCalendarButton = () => {
-    // toggleIsCalendarOpen();
-    setIsCalendarOpen((prev) => {
-      console.log(prev);
-      return !prev;
-    });
+    setIsCategoryOpen((prev) => !prev);
+    console.log(isCategoryOpen);
   };
 
   const duration = `${item.start ? item.start.format('YYYY-MM-DD') : ''}${
@@ -37,14 +24,13 @@ export default function ItemOptionBar() {
 
   return (
     <div className={styles.wrapper}>
-      {/* <p className={styles.duration}>{duration}</p> */}
-      <DatePicker title={duration} />
+      {duration && <DatePicker title={duration} />}
       <div className={styles.buttons}>
         <div className={styles.category}>
           <button type="button" className={styles.icon} onClick={handleClickCategory}>
             <CategoryIcon />
           </button>
-          {isCategoryOpen && <CategoryMenu setIsOpen={setIsCategoryOpen} />}
+          {isCategoryOpen && <CategoryMenu setIsOpen={setIsCategoryOpen} containerRef={categoryRef} />}
         </div>
         <DatePicker Icon={CalendarIcon} />
       </div>
