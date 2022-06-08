@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const editingItem = atom<null | Item>({
+export const editingItemState = atom<null | Item>({
   key: '#editingItem',
   default: null,
 });

@@ -19,7 +19,7 @@ const dummy: Category[] = [
   },
 ];
 
-export const categoryList = atom<Category[]>({
+export const categoryListState = atom<Category[]>({
   key: '#categoryList',
   default: dummy,
 });

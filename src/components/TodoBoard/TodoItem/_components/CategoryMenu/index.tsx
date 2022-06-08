@@ -6,14 +6,14 @@ import type { KeyboardEvent, FormEvent, Dispatch, SetStateAction } from 'react';
 
 import { AddIcon } from 'assets/svgs';
 import { colors } from 'store/constants';
-import { categoryList } from 'store/atoms/categoryList';
-import { editingItem } from 'store/atoms/editingItem';
+import { editingItemState, categoryListState } from 'store/atoms';
 import ColorIndicator from './ColorIndicator';
 import styles from './categoryMenu.module.scss';
 
 export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
-  const setItem = useSetRecoilState(editingItem);
-  const [categories, setCategories] = useRecoilState(categoryList);
+  const setItem = useSetRecoilState(editingItemState);
+  const [categories, setCategories] = useRecoilState(categoryListState);
+
   const [topIdx, setTopIdx] = useState(0);
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);

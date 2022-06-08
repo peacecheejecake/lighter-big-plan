@@ -26,7 +26,7 @@ const dummy: Item[] = [
   },
 ];
 
-export const itemList = atom<Item[]>({
+export const itemListState = atom<Item[]>({
   key: '#itemList',
   default: dummy,
 });

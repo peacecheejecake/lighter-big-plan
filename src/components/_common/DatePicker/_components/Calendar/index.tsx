@@ -7,14 +7,14 @@ import type { KeyboardEvent, FormEvent, MouseEvent, Dispatch, SetStateAction } f
 import type { Dayjs } from 'dayjs';
 
 import { DropIcon } from 'assets/svgs';
-import { editingItem } from 'store/atoms/editingItem';
+import { editingItemState } from 'store/atoms/editingItemState';
 import { useCalendarBounds } from 'hooks/useCalendarBounds';
 
 import { toYearMonth } from 'services/date';
 import styles from './calendar.module.scss';
 
 export default function Calendar({ setIsOpen }: DatePickerProps) {
-  const [item, setItem] = useRecoilState(editingItem);
+  const [item, setItem] = useRecoilState(editingItemState);
 
   const [value, setValue] = useState(toYearMonth((item as Item).start));
   const [selectedStart, setSelectedStart] = useState<Dayjs | null>(null);

@@ -1,12 +1,12 @@
 import { useRecoilState } from 'recoil';
 import { CalendarIcon } from 'assets/svgs';
-import { editingItem } from 'store/atoms/editingItem';
+import { editingItemState } from 'store/atoms';
 import DatePicker from 'components/_common/DatePicker';
 import { CategoryButton } from './_components';
 import styles from './itemOptionBar.module.scss';
 
 export default function ItemOptionBar() {
-  const [item, setItem] = useRecoilState(editingItem);
+  const [item, setItem] = useRecoilState(editingItemState);
 
   if (item === null) return null;
 

@@ -2,15 +2,14 @@ import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import cx from 'classnames';
 import { CheckIcon } from 'assets/svgs';
-import { itemList } from 'store/atoms/itemList';
-import { editingItem } from 'store/atoms/editingItem';
+import { editingItemState, itemListState } from 'store/atoms';
 import { useClickOuter } from 'hooks/useClickOuter';
 import ItemOptionBar from './_components/ItemOptionBar';
 import styles from './todoItem.module.scss';
 
 export default function TodoItem({ item }: TodoItemProps) {
-  const setItems = useSetRecoilState(itemList);
-  const setEditingItem = useSetRecoilState(editingItem);
+  const setItems = useSetRecoilState(itemListState);
+  const setEditingItem = useSetRecoilState(editingItemState);
 
   const [isSelected, setIsSelected] = useState(false);
   const [title, setTitle] = useState(item.title);
