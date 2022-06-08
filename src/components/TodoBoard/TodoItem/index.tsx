@@ -1,40 +1,28 @@
 import React, { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import cx from 'classnames';
 import { CheckIcon } from 'assets/svgs';
 import { itemList } from 'store/atoms/itemList';
 import { editingItem } from 'store/atoms/editingItem';
+import { useClickOuter } from 'hooks/useClickOuter';
 import ItemOptionBar from './_components/ItemOptionBar';
 import styles from './todoItem.module.scss';
 
-export default function TodoItem({ item, selectedId, setSelectedId, add = false }: TodoItemProps) {
+export default function TodoItem({ item }: TodoItemProps) {
   const setItems = useSetRecoilState(itemList);
   const setEditingItem = useSetRecoilState(editingItem);
 
   const [isSelected, setIsSelected] = useState(false);
-  const [isEditing, setIsEditing] = useState(add);
   const [title, setTitle] = useState(item.title);
   const [notes, setNotes] = useState(item.notes);
 
-  const liRef = useRef<HTMLLIElement>(null);
   const titleRef = useRef<HTMLInputElement>(null);
 
-  useEffect(() => {
-    const handleClickOuter = (event: MouseEvent) => {
-      if (!liRef.current || !event.target || liRef.current.contains(event.target as Node)) return;
+  const onClose = () => {
+    setIsSelected(false);
+  };
 
-      setIsSelected(false);
-      setIsEditing(false);
-
-      if (selectedId === item.id) {
-        setSelectedId(-1);
-      }
-    };
-
-    document.addEventListener('click', handleClickOuter);
-
-    return () => document.removeEventListener('click', handleClickOuter);
-  }, [item.id, selectedId, setSelectedId]);
+  const [isEditing, setIsEditing, liRef] = useClickOuter<HTMLLIElement>(onClose);
 
   useEffect(() => {
     if (isEditing && titleRef.current) {
@@ -56,7 +44,6 @@ export default function TodoItem({ item, selectedId, setSelectedId, add = false 
 
   const handleClickTitle = () => {
     setIsSelected(true);
-    setSelectedId(item.id);
   };
 
   const handleDoubleClickTitle = () => {
@@ -110,7 +97,7 @@ export default function TodoItem({ item, selectedId, setSelectedId, add = false 
 
 interface TodoItemProps {
   item: Item;
-  selectedId: number;
-  setSelectedId: React.Dispatch<React.SetStateAction<number>>;
-  add?: boolean;
+  // selectedId: number;
+  // setSelectedId: React.Dispatch<React.SetStateAction<number>>;
+  // add?: boolean;
 }

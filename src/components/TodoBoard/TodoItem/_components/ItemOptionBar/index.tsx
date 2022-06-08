@@ -15,7 +15,7 @@ export default function ItemOptionBar() {
   }`;
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.itemOptionBar}>
       {duration && <DatePicker title={duration} />}
       <div className={styles.buttons}>
         <CategoryButton />

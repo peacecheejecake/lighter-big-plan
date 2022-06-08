@@ -8,7 +8,6 @@ export default function CategoryButton() {
 
   const handleClickButton = () => {
     setIsOpen((prev) => !prev);
-    console.log(isOpen);
   };
 
   return (

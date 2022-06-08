@@ -23,7 +23,7 @@ export default function TodoBoard() {
       </p>
       <div className={styles.todos}>
         {items.map((item) => (
-          <TodoItem key={item.id} item={item} selectedId={selectedId} setSelectedId={setSelectedId} />
+          <TodoItem key={item.id} item={item} />
         ))}
       </div>
     </>
