@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { useRecoilState } from 'recoil';
 import { itemList } from 'store/atoms/itemList';
 import TodoItem from 'components/TodoBoard/TodoItem';
