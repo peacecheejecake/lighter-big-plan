@@ -8,7 +8,6 @@ import styles from './todoBoard.module.scss';
 
 export default function TodoBoard() {
   const [items, setItems] = useRecoilState(itemList);
-  const [selectedId, setSelectedId] = useState(-1);
 
   const handleClickAdd = () => {
     const newItem = createNewItem(items.length);
