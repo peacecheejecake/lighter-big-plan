@@ -1,6 +1,7 @@
 @use 'styles/constants/colors';
 @use 'styles/constants/levels';
 @use 'styles/mixins/flexbox';
+@use 'styles/mixins/animation';
 
 .dropMenu {
   position: absolute;
@@ -11,6 +12,7 @@
   background-color: colors.$GRAY0;
   border: 1px solid colors.$GRAY5;
   border-radius: 10px;
+  animation: 150ms fadeIn;
 }
 
 .menu {

@@ -11,7 +11,7 @@ import { editingItem } from 'store/atoms/editingItem';
 import ColorIndicator from './ColorIndicator';
 import styles from './categoryMenu.module.scss';
 
-export default function CategoryMenu({ setIsOpen, containerRef }: CategoryMenuProps) {
+export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
   const setItem = useSetRecoilState(editingItem);
   const [categories, setCategories] = useRecoilState(categoryList);
   const [topIdx, setTopIdx] = useState(0);
@@ -54,7 +54,7 @@ export default function CategoryMenu({ setIsOpen, containerRef }: CategoryMenuPr
   };
 
   return (
-    <ul className={styles.dropMenu} ref={containerRef}>
+    <ul className={styles.dropMenu}>
       {[...categories.slice(0, topIdx), ...categories.slice(topIdx + 1)].map(({ color, name }, idx) => {
         const key = `className-${name}-${idx}`;
         return (
@@ -106,5 +106,4 @@ export default function CategoryMenu({ setIsOpen, containerRef }: CategoryMenuPr
 
 interface CategoryMenuProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
-  containerRef: RefObject<HTMLUListElement>;
 }

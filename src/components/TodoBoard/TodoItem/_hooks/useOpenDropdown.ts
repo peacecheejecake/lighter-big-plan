@@ -1,5 +1,4 @@
 import { useClickOuter } from 'hooks/useClickOuter';
-import { useEffect, useRef, useState } from 'react';
 
 export const useOpenDropdown = <T extends HTMLElement>() => {
   // const [isOpen, setIsOpen] = useState(false);
