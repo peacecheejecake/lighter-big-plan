@@ -1,16 +1,16 @@
 import { useEffect, useRef, useState } from 'react';
 
-export const useClickOuter = <T extends HTMLElement>() => {
+export const useClickOuter = <T extends HTMLElement>(onClose?: () => void) => {
   const containerRef = useRef<T>(null);
   const [openState, setOpenState] = useState(false);
 
   useEffect(() => {
     const handleOuterClick = (event: MouseEvent) => {
-      if (!openState || !containerRef.current) return;
+      if (!containerRef.current) return;
 
       if (!containerRef.current.contains(event.target as Node)) {
-        console.log(containerRef.current, event.target);
         setOpenState(false);
+        if (onClose) onClose();
       }
     };
 
@@ -19,7 +19,7 @@ export const useClickOuter = <T extends HTMLElement>() => {
     return () => {
       document.removeEventListener('click', handleOuterClick);
     };
-  }, [openState]);
+  }, [openState, onClose]);
 
   return [openState, setOpenState, containerRef] as const;
 };
