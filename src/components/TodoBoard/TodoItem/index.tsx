@@ -9,18 +9,23 @@ import { useInputChange } from 'hooks/useInputChange';
 import ItemOptionBar from './_components/ItemOptionBar';
 import styles from './todoItem.module.scss';
 
-export default function TodoItem({ item, idx }: TodoItemProps) {
+export default function TodoItem({ item }: TodoItemProps) {
   const [editingItemIdx, setEditingItemIdx] = useRecoilState(editingItemIdxState);
   const [selectedItemIdx, setSelectedItemIdx] = useRecoilState(selectedItemIdxState);
   const setItemList = useSetRecoilState(itemListState);
 
-  const [title, , handleChangeTitle] = useInputChange<HTMLInputElement>(item.title);
-  const [notes, , handleChangeNotes] = useInputChange<HTMLTextAreaElement>(item.notes);
+  const [title, setTitle, handleChangeTitle] = useInputChange<HTMLInputElement>(item.title);
+  const [notes, setNotes, handleChangeNotes] = useInputChange<HTMLTextAreaElement>(item.notes);
 
   const titleRef = useRef<HTMLInputElement>(null);
 
-  const isEditing = useMemo(() => editingItemIdx === idx, [editingItemIdx, idx]);
-  const isSelected = useMemo(() => selectedItemIdx === idx, [selectedItemIdx, idx]);
+  const isEditing = useMemo(() => editingItemIdx === item.id, [editingItemIdx, item]);
+  const isSelected = useMemo(() => selectedItemIdx === item.id, [selectedItemIdx, item]);
+
+  useEffect(() => {
+    setTitle(item.title);
+    setNotes(item.notes);
+  }, [item.title, item.notes, setTitle, setNotes]);
 
   useEffect(() => {
     if (isEditing && titleRef.current) {
@@ -41,11 +46,11 @@ export default function TodoItem({ item, idx }: TodoItemProps) {
   };
 
   const handleClickTitle = () => {
-    setSelectedItemIdx(idx);
+    setSelectedItemIdx(item.id);
   };
 
   const handleDoubleClickTitle = () => {
-    setEditingItemIdx(idx);
+    setEditingItemIdx(item.id);
   };
 
   return (
@@ -71,7 +76,7 @@ export default function TodoItem({ item, idx }: TodoItemProps) {
             value={title}
             placeholder="Empty Title"
             ref={titleRef}
-            data-idx={idx}
+            data-idx={item.id}
           />
           {isEditing && (
             <>
@@ -87,5 +92,4 @@ export default function TodoItem({ item, idx }: TodoItemProps) {
 
 interface TodoItemProps {
   item: Item;
-  idx: number;
 }

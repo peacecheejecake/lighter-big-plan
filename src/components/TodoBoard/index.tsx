@@ -11,25 +11,42 @@ export default function TodoBoard() {
   const [itemList, setItemList] = useRecoilState(itemListState);
   const [editingItemIdx, setEditingItemIdx] = useRecoilState(editingItemIdxState);
   const [selectedItemIdx, setSelectedItemIdx] = useRecoilState(selectedItemIdxState);
+  const [newItemIdx, setNewItemIdx] = useState(-1);
 
-  const [creatingNew, setCreatingNew] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
+  const addRef = useRef<SVGSVGElement>(null);
 
   const handleClickAdd = () => {
-    const newItem = createNewItem(itemList.length);
-    setItemList((prev) => [...prev, newItem]);
+    setNewItemIdx(selectedItemIdx + 1);
   };
+
+  useEffect(() => {
+    if (newItemIdx === -1) return;
+    setItemList((prev) => [
+      ...prev.slice(0, newItemIdx).map((item) => ({ ...item })),
+      createNewItem(newItemIdx),
+      ...prev.slice(newItemIdx).map((item) => ({ ...item, id: item.id + 1 })),
+    ]);
+    setSelectedItemIdx(newItemIdx);
+    setEditingItemIdx(newItemIdx);
+  }, [newItemIdx, setItemList, setSelectedItemIdx, setEditingItemIdx]);
 
   useEffect(() => {
     const handleClickBounded = (event: MouseEvent) => {
       if (!ref.current) return;
-      const { idx } = (event.target as HTMLElement).dataset;
+
+      const { target } = event;
+      const { idx } = (target as HTMLElement).dataset;
 
       if (idx) {
         setSelectedItemIdx(Number(idx));
-      } else if (!ref.current.contains(event.target as Node | null) || ref.current === event.target) {
+      } else if (
+        (!ref.current.contains(target as Node | null) || ref.current === target) &&
+        target !== addRef.current
+      ) {
         setSelectedItemIdx(-1);
         setEditingItemIdx(-1);
+        setNewItemIdx(-1);
       }
     };
 
@@ -42,18 +59,20 @@ export default function TodoBoard() {
   }, [editingItemIdx, setSelectedItemIdx]);
 
   useEffect(() => {
-    setEditingItemIdx(-1);
-  }, [setEditingItemIdx, selectedItemIdx]);
+    if (selectedItemIdx !== editingItemIdx) {
+      setEditingItemIdx(-1);
+    }
+  }, [selectedItemIdx, editingItemIdx, setEditingItemIdx]);
 
   return (
     <>
       <p className={styles.title}>
         Quick Todo
-        <AddIcon className={styles.addIcon} onClick={handleClickAdd} />
+        <AddIcon className={styles.addIcon} onClick={handleClickAdd} ref={addRef} />
       </p>
       <div className={styles.todos} role="menuitem" tabIndex={-1} ref={ref}>
-        {itemList.map((item, idx) => (
-          <TodoItem key={item.id} item={item} idx={idx} />
+        {itemList.map((item) => (
+          <TodoItem key={item.id} item={item} />
         ))}
       </div>
     </>

@@ -8,6 +8,15 @@
   line-height: 36px;
   border-radius: 8px;
   transition: 150ms;
+  transform-origin: top;
+  animation: grow 150ms;
+  animation-fill-mode: both;
+
+  @keyframes grow {
+    from {
+      height: 0;
+    }
+  }
 
   form {
     display: flex;
