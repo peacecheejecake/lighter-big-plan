@@ -1,10 +1,10 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRecoilState } from 'recoil';
 
 import TodoItem from 'components/TodoBoard/TodoItem';
 import { itemListState, editingItemIdxState, selectedItemIdxState } from 'store/atoms';
 import { AddIcon } from 'assets/svgs';
-import { createNewItem } from './TodoItem/_utils';
+import { createNewItem } from './TodoItem/_services';
 import styles from './todoBoard.module.scss';
 
 export default function TodoBoard() {
@@ -15,6 +15,17 @@ export default function TodoBoard() {
 
   const ref = useRef<HTMLDivElement>(null);
   const addRef = useRef<SVGSVGElement>(null);
+
+  const handleKeyDown = useCallback(
+    (event: KeyboardEvent) => {
+      event.preventDefault();
+
+      if (event.key === 'Enter') {
+        setNewItemIdx(selectedItemIdx + 1);
+      }
+    },
+    [selectedItemIdx]
+  );
 
   const handleClickAdd = () => {
     setNewItemIdx(selectedItemIdx + 1);
@@ -53,6 +64,14 @@ export default function TodoBoard() {
     document.addEventListener('click', handleClickBounded);
     return () => document.removeEventListener('click', handleClickBounded);
   }, [setSelectedItemIdx, setEditingItemIdx]);
+
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [handleKeyDown]);
 
   useEffect(() => {
     setSelectedItemIdx(editingItemIdx);

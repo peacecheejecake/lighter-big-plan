@@ -1,7 +1,7 @@
 import { useEffect, useRef, useMemo } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import cx from 'classnames';
-import type { ChangeEvent } from 'react';
+import type { ChangeEvent, KeyboardEvent } from 'react';
 
 import { CheckIcon } from 'assets/svgs';
 import { editingItemIdxState, itemListState, selectedItemIdxState } from 'store/atoms';
@@ -53,6 +53,16 @@ export default function TodoItem({ item }: TodoItemProps) {
     setEditingItemIdx(item.id);
   };
 
+  const handleKeydown = (event: KeyboardEvent) => {
+    event.preventDefault();
+
+    switch (event.key) {
+      case 'Escape':
+        setEditingItemIdx(-1);
+        break;
+    }
+  };
+
   return (
     <li
       className={cx(styles.todoItem, {
@@ -65,7 +75,12 @@ export default function TodoItem({ item }: TodoItemProps) {
         <label htmlFor={`checkbox-${item.id}`} className={styles.checkmark}>
           <CheckIcon className={styles.icon} />
         </label>
-        <div className={cx(styles.detail, { [styles.open]: isEditing })}>
+        <div
+          className={cx(styles.detail, { [styles.open]: isEditing })}
+          onKeyDown={handleKeydown}
+          role="menuitem"
+          tabIndex={-1}
+        >
           <input
             type="text"
             className={styles.title}
