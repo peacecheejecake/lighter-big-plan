@@ -1,25 +1,27 @@
-import { useState, useEffect, useRef, RefObject } from 'react';
-import { useSetRecoilState, useRecoilState } from 'recoil';
+import { useState, useEffect, useRef } from 'react';
+import { useRecoilState } from 'recoil';
 import cx from 'classnames';
 
-import type { KeyboardEvent, FormEvent, Dispatch, SetStateAction } from 'react';
+import type { KeyboardEvent, Dispatch, SetStateAction } from 'react';
 
 import { AddIcon } from 'assets/svgs';
 import { colors } from 'store/constants';
-import { editingItemState, categoryListState } from 'store/atoms';
+import { categoryListState } from 'store/atoms';
+import { useEditingItem } from 'hooks/useEditingItem';
+import { useInputChange } from 'hooks/useInputChange';
 import ColorIndicator from './ColorIndicator';
 import styles from './categoryMenu.module.scss';
 
 export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
-  const setItem = useSetRecoilState(editingItemState);
+  const [, setItem] = useEditingItem();
   const [categories, setCategories] = useRecoilState(categoryListState);
 
   const [topIdx, setTopIdx] = useState(0);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue, handleInputChange] = useInputChange<HTMLInputElement>();
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setItem((prev) => ({ ...(prev as Item), categoryId: topIdx }));
+    setItem((prev) => ({ ...prev, categoryId: topIdx }));
   }, [topIdx, setItem, setIsOpen]);
 
   const handleClickItem = (e: React.MouseEvent<HTMLElement>) => {
@@ -32,10 +34,6 @@ export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
   const handleClickAddMenu = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!inputRef.current || e.currentTarget.contains(document.activeElement)) return;
     inputRef.current.focus();
-  };
-
-  const handleInputChange = (e: FormEvent<HTMLInputElement>) => {
-    setInputValue(e.currentTarget.value);
   };
 
   const handleEnterKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {

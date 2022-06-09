@@ -6,10 +6,12 @@
 
 .calenderWrapper {
   position: absolute;
-  top: 0;
+  top: 35px;
+  left: 0;
   z-index: levels.$DROPDOWN;
   width: 235px;
   height: 245px;
+  cursor: auto;
   background-color: colors.$BG_W;
   border-radius: 20px;
   box-shadow: 0 2px 10px rgba(colors.$BLACK, 4%);

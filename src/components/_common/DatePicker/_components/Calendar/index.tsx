@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useRecoilState } from 'recoil';
 import cx from 'classnames';
 import dayjs from 'dayjs';
 
@@ -7,14 +6,13 @@ import type { KeyboardEvent, FormEvent, MouseEvent, Dispatch, SetStateAction } f
 import type { Dayjs } from 'dayjs';
 
 import { DropIcon } from 'assets/svgs';
-import { editingItemState } from 'store/atoms/editingItemState';
-import { useCalendarBounds } from 'hooks/useCalendarBounds';
-
 import { toYearMonth } from 'services/date';
+import { useCalendarBounds } from 'hooks/useCalendarBounds';
+import { useEditingItem } from 'hooks/useEditingItem';
 import styles from './calendar.module.scss';
 
 export default function Calendar({ setIsOpen }: DatePickerProps) {
-  const [item, setItem] = useRecoilState(editingItemState);
+  const [item, setItem] = useEditingItem();
 
   const [value, setValue] = useState(toYearMonth((item as Item).start));
   const [selectedStart, setSelectedStart] = useState<Dayjs | null>(null);
@@ -60,19 +58,17 @@ export default function Calendar({ setIsOpen }: DatePickerProps) {
   const handleClickDate = (e: MouseEvent<HTMLButtonElement>) => {
     const dayOnClick = firstDayInCalendar.add(Number(e.currentTarget.dataset.idx), 'day');
 
-    // if (dayOnClick < dayjs('2022-02-01') && dayOnClick > dayjs('2022-04-22')) return;
-
     if ((selectedStart === null && selectedEnd === null) || (selectedStart && selectedEnd)) {
       setSelectedStart(dayOnClick);
       setSelectedEnd(null);
     } else if (selectedStart && selectedEnd === null) {
       if (dayOnClick > selectedStart) {
         setSelectedEnd(dayOnClick);
-        setItem((prev) => ({ ...(prev as Item), start: selectedStart, end: dayOnClick }));
+        setItem((prev) => ({ ...prev, start: selectedStart, end: dayOnClick }));
       } else if (dayOnClick < selectedStart) {
         setSelectedEnd(selectedStart);
         setSelectedStart(dayOnClick);
-        setItem((prev) => ({ ...(prev as Item), start: selectedStart, end: dayOnClick }));
+        setItem((prev) => ({ ...prev, start: selectedStart, end: dayOnClick }));
       }
 
       setIsOpen(false);

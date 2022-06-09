@@ -6,12 +6,14 @@ import type { KeyboardEvent, FormEvent, Dispatch, SetStateAction } from 'react';
 
 import { AddIcon } from 'assets/svgs';
 import { colors } from 'store/constants';
-import { categoryListState, editingItemState } from 'store/atoms';
+import { categoryListState } from 'store/atoms';
+import { useEditingItem } from 'hooks/useEditingItem';
 import ColorIndicator from './ColorIndicator';
 import styles from '../dropButton.module.scss';
 
 export default function DropButton({ setIsOpen }: CategoryMenuProps) {
-  const setItem = useSetRecoilState(editingItemState);
+  // const setItem = useSetRecoilState(editingItemIdxState);
+  const [, setItem] = useEditingItem();
   const [categories, setCategories] = useRecoilState(categoryListState);
 
   const [topIdx, setTopIdx] = useState(0);
@@ -19,7 +21,7 @@ export default function DropButton({ setIsOpen }: CategoryMenuProps) {
   const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    setItem((prev) => ({ ...(prev as Item), categoryId: topIdx }));
+    setItem((prev) => ({ ...prev, categoryId: topIdx }));
   }, [topIdx, setItem, setIsOpen]);
 
   const handleClickItem = (e: React.MouseEvent<HTMLElement>) => {

@@ -10,6 +10,8 @@ interface Item {
   done: boolean;
 }
 
+type ItemKey = keyof Item;
+
 interface Category {
   id: number;
   name: string;

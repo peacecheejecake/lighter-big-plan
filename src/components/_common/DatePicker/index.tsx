@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import type { FunctionComponent, SVGProps } from 'react';
+import { FunctionComponent, SVGProps } from 'react';
 
 import { useClickOuter } from 'hooks/useClickOuter';
 import Calendar from './_components/Calendar';

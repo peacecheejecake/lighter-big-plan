@@ -1,3 +1,4 @@
 export { categoryListState } from './categoryListState';
-export { editingItemState } from './editingItemState';
+export { editingItemIdxState } from './editingItemIdxState';
+export { selectedItemIdxState } from './seletedItemIdxState';
 export { itemListState } from './itemListState';
