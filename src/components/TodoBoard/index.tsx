@@ -18,10 +18,11 @@ export default function TodoBoard() {
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      event.preventDefault();
-
-      if (event.key === 'Enter') {
-        setNewItemIdx(selectedItemIdx + 1);
+      switch (event.key) {
+        case 'Enter':
+          event.preventDefault();
+          setNewItemIdx(selectedItemIdx + 1);
+          break;
       }
     },
     [selectedItemIdx]

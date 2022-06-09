@@ -44,6 +44,10 @@
       }
     }
 
+    .initial {
+      animation-duration: 0;
+    }
+
     input[type='checkbox']:checked + .checkmark {
       border: none;
       animation: setDone 150ms;

@@ -18,9 +18,14 @@ export default function TodoItem({ item }: TodoItemProps) {
   const [notes, setNotes, handleChangeNotes] = useInputChange<HTMLTextAreaElement>(item.notes);
 
   const titleRef = useRef<HTMLInputElement>(null);
+  const checkRef = useRef<HTMLInputElement>(null);
 
   const isEditing = useMemo(() => editingItemIdx === item.id, [editingItemIdx, item]);
   const isSelected = useMemo(() => selectedItemIdx === item.id, [selectedItemIdx, item]);
+
+  // useEffect(() => {
+  //   checkRef.current?.classList.remove(styles.initial);
+  // }, []);
 
   useEffect(() => {
     setTitle(item.title);
@@ -54,8 +59,6 @@ export default function TodoItem({ item }: TodoItemProps) {
   };
 
   const handleKeydown = (event: KeyboardEvent) => {
-    event.preventDefault();
-
     switch (event.key) {
       case 'Escape':
         setEditingItemIdx(-1);
@@ -71,8 +74,8 @@ export default function TodoItem({ item }: TodoItemProps) {
       })}
     >
       <form action="" method="get" className={styles.form}>
-        <input id={`checkbox-${item.id}`} type="checkbox" onChange={handleClickDone} />
-        <label htmlFor={`checkbox-${item.id}`} className={styles.checkmark}>
+        <input id={`checkbox-${item.id}`} type="checkbox" onChange={handleClickDone} ref={checkRef} />
+        <label htmlFor={`checkbox-${item.id}`} className={cx(styles.checkmark, styles.initial)}>
           <CheckIcon className={styles.icon} />
         </label>
         <div
