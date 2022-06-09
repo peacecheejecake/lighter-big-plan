@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRecoilState } from 'recoil';
 
 import TodoItem from 'components/TodoBoard/TodoItem';
@@ -11,6 +11,8 @@ export default function TodoBoard() {
   const [itemList, setItemList] = useRecoilState(itemListState);
   const [editingItemIdx, setEditingItemIdx] = useRecoilState(editingItemIdxState);
   const [selectedItemIdx, setSelectedItemIdx] = useRecoilState(selectedItemIdxState);
+
+  const [creatingNew, setCreatingNew] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
 
   const handleClickAdd = () => {
@@ -29,7 +31,6 @@ export default function TodoBoard() {
         setSelectedItemIdx(-1);
         setEditingItemIdx(-1);
       }
-      setSelectedItemIdx(idx ? Number(idx) : -1);
     };
 
     document.addEventListener('click', handleClickBounded);
@@ -39,6 +40,10 @@ export default function TodoBoard() {
   useEffect(() => {
     setSelectedItemIdx(editingItemIdx);
   }, [editingItemIdx, setSelectedItemIdx]);
+
+  useEffect(() => {
+    setEditingItemIdx(-1);
+  }, [setEditingItemIdx, selectedItemIdx]);
 
   return (
     <>

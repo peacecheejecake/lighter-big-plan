@@ -1,32 +1,26 @@
-import { ChangeEvent, useEffect, useRef, useState } from 'react';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useEffect, useRef, useMemo } from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import cx from 'classnames';
+import type { ChangeEvent } from 'react';
+
 import { CheckIcon } from 'assets/svgs';
 import { editingItemIdxState, itemListState, selectedItemIdxState } from 'store/atoms';
-import { useClickOuter } from 'hooks/useClickOuter';
 import { useInputChange } from 'hooks/useInputChange';
 import ItemOptionBar from './_components/ItemOptionBar';
 import styles from './todoItem.module.scss';
 
 export default function TodoItem({ item, idx }: TodoItemProps) {
-  const setItemList = useSetRecoilState(itemListState);
   const [editingItemIdx, setEditingItemIdx] = useRecoilState(editingItemIdxState);
   const [selectedItemIdx, setSelectedItemIdx] = useRecoilState(selectedItemIdxState);
+  const setItemList = useSetRecoilState(itemListState);
 
-  // const [isSelected, setIsSelected] = useState(false);
   const [title, , handleChangeTitle] = useInputChange<HTMLInputElement>(item.title);
   const [notes, , handleChangeNotes] = useInputChange<HTMLTextAreaElement>(item.notes);
 
   const titleRef = useRef<HTMLInputElement>(null);
 
-  // const onClose = () => {
-  //   setIsSelected(false);
-  // };
-
-  // const [isEditing, setIsEditing, liRef] = useClickOuter<HTMLLIElement>();
-
-  const isEditing = editingItemIdx === idx;
-  const isSelected = selectedItemIdx === idx;
+  const isEditing = useMemo(() => editingItemIdx === idx, [editingItemIdx, idx]);
+  const isSelected = useMemo(() => selectedItemIdx === idx, [selectedItemIdx, idx]);
 
   useEffect(() => {
     if (isEditing && titleRef.current) {
@@ -47,23 +41,12 @@ export default function TodoItem({ item, idx }: TodoItemProps) {
   };
 
   const handleClickTitle = () => {
-    // setIsSelected(true);
     setSelectedItemIdx(idx);
   };
 
   const handleDoubleClickTitle = () => {
-    // setIsEditing(true);
-    // setEditingItem({ ...item });
     setEditingItemIdx(idx);
   };
-
-  // const handleChangeTitle = (event: ChangeEvent<HTMLInputElement>) => {
-  //   setTitle(event.currentTarget.value);
-  // };
-
-  // const handleChangeNotes = (event: ChangeEvent<HTMLTextAreaElement>) => {
-  //   setNotes(event.currentTarget.value);
-  // };
 
   return (
     <li
@@ -71,8 +54,6 @@ export default function TodoItem({ item, idx }: TodoItemProps) {
         [styles.selectedItem]: !isEditing && isSelected,
         [styles.editor]: isEditing,
       })}
-      // ref={liRef}
-      // data-idx={idx}
     >
       <form action="" method="get" className={styles.form}>
         <input id={`checkbox-${item.id}`} type="checkbox" onChange={handleClickDone} />
@@ -88,6 +69,7 @@ export default function TodoItem({ item, idx }: TodoItemProps) {
             onDoubleClick={handleDoubleClickTitle}
             onChange={handleChangeTitle}
             value={title}
+            placeholder="Empty Title"
             ref={titleRef}
             data-idx={idx}
           />
@@ -105,8 +87,5 @@ export default function TodoItem({ item, idx }: TodoItemProps) {
 
 interface TodoItemProps {
   item: Item;
-  // selectedId: number;
-  // setSelectedId: React.Dispatch<React.SetStateAction<number>>;
-  // add?: boolean;
   idx: number;
 }
