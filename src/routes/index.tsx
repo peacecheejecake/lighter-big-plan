@@ -1,4 +1,4 @@
-import { Routes as RouterRoutes, Route, BrowserRouter } from 'react-router-dom';
+import { Routes as RouterRoutes, Route, BrowserRouter, Navigate } from 'react-router-dom';
 import Dashboard from './Dashboard';
 import Todo from './Todo';
 import styles from './routes.module.scss';
@@ -9,8 +9,9 @@ export default function Routes() {
       <div className={styles.app}>
         <BrowserRouter>
           <RouterRoutes>
-            <Route path="/" element={<Todo />} />
+            <Route index element={<Todo />} />
             <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/*" element={<Navigate replace to="/" />} />
           </RouterRoutes>
         </BrowserRouter>
       </div>
