@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { useRecoilValue } from 'recoil';
 import cx from 'classnames';
 import dayjs from 'dayjs';
 
@@ -10,9 +11,11 @@ import { toYearMonth } from 'services/date';
 import { useCalendarBounds } from 'hooks/useCalendarBounds';
 import { useEditingItem } from 'components/TodoBoard/_hooks/useEditingItem';
 import { useExpandDirection } from 'components/TodoBoard/TodoItem/_hooks/useExpandDirection';
+import { darkModeState } from 'store/states/themeState';
 import styles from './calendar.module.scss';
 
 export default function Calendar({ setIsOpen, className }: DatePickerProps) {
+  const darkMode = useRecoilValue(darkModeState);
   const [item, setItem] = useEditingItem();
 
   const [value, setValue] = useState(toYearMonth((item as Item).start));
@@ -80,10 +83,13 @@ export default function Calendar({ setIsOpen, className }: DatePickerProps) {
     }
   };
 
-  console.log(expandToUp);
+  const themeClassName = darkMode ? styles.darkMode : styles.lightMode;
 
   return (
-    <div className={cx(styles.wrapper, { [styles.expandToUp]: expandToUp }, className)} ref={containerRef}>
+    <div
+      className={cx(styles.wrapper, { [styles.expandToUp]: expandToUp }, themeClassName, className)}
+      ref={containerRef}
+    >
       <div className={styles.month}>
         <button type="button" className={styles.toNextMonth} onClick={handleClickPrevMonth}>
           <DropIcon className={styles.toLeft} />
@@ -103,6 +109,7 @@ export default function Calendar({ setIsOpen, className }: DatePickerProps) {
         {[...Array(35).keys()].map((dateOffset) => {
           const key = `date-${dateOffset}`;
           const day = firstDayInCalendar.add(dateOffset, 'day');
+
           return (
             <button
               type="button"

@@ -21,10 +21,6 @@
     svg {
       fill: colors.$GRAY5;
       transition: 100ms;
-
-      &:hover {
-        fill: colors.$GRAY9;
-      }
     }
 
     .leftDatePicker {
@@ -39,4 +35,12 @@
       -webkit-transform-origin-x: right;
     }
   }
+}
+
+.darkMode svg:hover {
+  fill: colors.$GRAY0;
+}
+
+.lightMode svg:hover {
+  fill: colors.$GRAY9;
 }

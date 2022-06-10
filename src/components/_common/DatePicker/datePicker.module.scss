@@ -19,10 +19,6 @@
       }
     }
 
-    .iconOpen {
-      fill: colors.$GRAY9;
-    }
-
     .title {
       font-size: 14px;
       line-height: 14px;
@@ -34,15 +30,43 @@
         background-color: transparent;
       }
     }
-
-    .titleOpen {
-      color: colors.$GRAY9;
-    }
   }
 
   &:hover {
     .title {
       color: colors.$GRAY9;
+    }
+  }
+}
+
+.lightMode {
+  &:hover .title {
+    color: colors.$GRAY9;
+  }
+
+  .button {
+    .titleOpen {
+      color: colors.$GRAY9;
+    }
+
+    .iconOpen {
+      fill: colors.$GRAY9;
+    }
+  }
+}
+
+.darkMode {
+  &:hover .title {
+    color: colors.$GRAY0;
+  }
+
+  .button {
+    .titleOpen {
+      color: colors.$GRAY0;
+    }
+
+    .iconOpen {
+      fill: colors.$GRAY0;
     }
   }
 }

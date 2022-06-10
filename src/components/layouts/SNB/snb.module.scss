@@ -54,3 +54,21 @@
     }
   }
 }
+
+.lightMode {
+  color: colors.$GRAY9;
+  background-color: colors.$BG_W;
+
+  svg {
+    fill: colors.$GRAY9;
+  }
+}
+
+.darkMode {
+  color: colors.$GRAY0;
+  background-color: colors.$BG_DARK;
+
+  svg {
+    fill: colors.$GRAY0;
+  }
+}

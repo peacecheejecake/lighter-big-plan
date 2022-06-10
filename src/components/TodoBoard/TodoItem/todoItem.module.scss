@@ -89,37 +89,19 @@
     .open {
       .title {
         cursor: auto;
-
-        &::selection {
-          color: colors.$GRAY0;
-          background-color: colors.$GRAY9;
-        }
-
-        &:focus {
-          background-color: colors.$WHITE;
-        }
-
-        &:not(:focus) {
-          background-color: transparent;
-        }
       }
     }
   }
 }
 
-.selectedItem {
-  background-color: rgba(colors.$GRAY9, 4%);
-
-  .checkmark {
-    background-color: colors.$GRAY4;
-  }
+.selectedItem .checkmark {
+  background-color: colors.$GRAY4;
 }
 
 .editor {
   min-height: 200px;
   padding: 16px;
   margin: 30px 0 25px;
-  background-color: rgba(colors.$GRAY9, 4%);
 
   form {
     align-items: baseline;
@@ -144,7 +126,6 @@
 
         &:focus {
           padding-left: 0 10px;
-          background-color: colors.$WHITE;
         }
       }
     }
@@ -181,5 +162,77 @@
   100% {
     background-color: transparent;
     transform: scale(1);
+  }
+}
+
+.lightMode.selectedItem {
+  background-color: rgba(colors.$GRAY9, 4%);
+}
+
+.darkMode.selectedItem {
+  background-color: rgba(colors.$WHITE, 4%);
+}
+
+.lightMode.editor {
+  background-color: rgba(colors.$GRAY9, 4%);
+}
+
+.darkMode.editor {
+  background-color: rgba(colors.$WHITE, 4%);
+}
+
+.lightMode {
+  .title {
+    color: colors.$GRAY9;
+  }
+
+  .open {
+    .title {
+      &::selection {
+        color: colors.$GRAY0;
+        background-color: colors.$BG_DARK;
+      }
+
+      &:focus {
+        background-color: rgba(colors.$WHITE, 80%);
+      }
+
+      &:not(:focus) {
+        background-color: transparent;
+      }
+    }
+
+    textarea:focus {
+      background-color: rgba(colors.$WHITE, 80%);
+    }
+  }
+}
+
+.darkMode {
+  .title {
+    color: colors.$GRAY0;
+  }
+
+  .open {
+    .title {
+      color: colors.$GRAY0;
+
+      &::selection {
+        color: colors.$GRAY9;
+        background-color: colors.$GRAY0;
+      }
+
+      &:focus {
+        background-color: rgba(colors.$WHITE, 10%);
+      }
+
+      &:not(:focus) {
+        background-color: transparent;
+      }
+    }
+
+    textarea:focus {
+      background-color: rgba(colors.$WHITE, 10%);
+    }
   }
 }

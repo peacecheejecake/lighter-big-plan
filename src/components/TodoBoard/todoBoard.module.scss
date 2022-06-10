@@ -6,7 +6,6 @@
   padding: 20px 40px;
   margin: 40px 20px;
   overflow: scroll;
-  background-color: colors.$WHITE;
   border: 1px solid colors.$GRAY5;
   border-radius: 30px;
 
@@ -37,4 +36,14 @@
       margin-bottom: 20px;
     }
   }
+}
+
+.lightMode {
+  color: colors.$GRAY9;
+  background-color: colors.$WHITE;
+}
+
+.darkMode {
+  color: colors.$GRAY0;
+  background-color: colors.$GRAY9;
 }

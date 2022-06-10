@@ -11,4 +11,12 @@
     max-width: 100%;
     padding: 0 20px;
   }
+
+  main.lightMode {
+    background-color: colors.$GRAY2;
+  }
+
+  main.darkMode {
+    background-color: colors.$GRAY7;
+  }
 }

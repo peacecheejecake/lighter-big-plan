@@ -1,5 +1,5 @@
 import { useEffect, useRef, useMemo } from 'react';
-import { useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import cx from 'classnames';
 
 import type { ChangeEvent, KeyboardEvent } from 'react';
@@ -7,6 +7,7 @@ import type { ChangeEvent, KeyboardEvent } from 'react';
 import { CheckIcon } from 'assets/svgs';
 import { editingItemIdxState, itemListState, selectedItemIdxState } from 'components/TodoBoard/_states';
 import { useInputChange } from 'hooks/useInputChange';
+import { darkModeState } from 'store/states/themeState';
 import ItemOptionBar from './_components/ItemOptionBar';
 import styles from './todoItem.module.scss';
 
@@ -14,6 +15,7 @@ export default function TodoItem({ item }: TodoItemProps) {
   const [editingItemIdx, setEditingItemIdx] = useRecoilState(editingItemIdxState);
   const [selectedItemIdx, setSelectedItemIdx] = useRecoilState(selectedItemIdxState);
   const setItemList = useSetRecoilState(itemListState);
+  const darkMode = useRecoilValue(darkModeState);
 
   const [title, setTitle, handleChangeTitle] = useInputChange<HTMLInputElement>(item.title);
   const [notes, setNotes, handleChangeNotes] = useInputChange<HTMLTextAreaElement>(item.notes);
@@ -69,9 +71,11 @@ export default function TodoItem({ item }: TodoItemProps) {
     }
   };
 
+  const themeClassName = darkMode ? styles.darkMode : styles.lightMode;
+
   return (
     <li
-      className={cx(styles.todoItem, {
+      className={cx(styles.todoItem, themeClassName, {
         [styles.selectedItem]: !isEditing && isSelected,
         [styles.editor]: isEditing,
       })}

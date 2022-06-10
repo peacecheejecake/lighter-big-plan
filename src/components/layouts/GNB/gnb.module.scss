@@ -1,7 +1,7 @@
 @use 'styles/constants/colors';
 @use 'styles/constants/levels';
 
-.gnbWrapper {
+.wrapper {
   position: fixed;
   z-index: levels.$GNB;
   display: flex;
@@ -12,7 +12,6 @@
   padding-right: 40px;
   padding-left: 10px;
   overflow: hidden;
-  background-color: colors.$WHITE;
   border-bottom: 1px solid colors.$GRAY5;
 
   .leftWing {
@@ -25,8 +24,50 @@
     }
   }
 
-  // .rightWing {
-  //   .hello {
-  //   }
-  // }
+  .rightWing {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .hello {
+      margin-left: 10px;
+    }
+
+    .themeButton {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      // transition: 100ms;
+    }
+  }
+}
+
+.lightMode {
+  color: colors.$GRAY9;
+  background-color: colors.$BG_W;
+
+  .themeButton {
+    fill: colors.$GRAY9;
+
+    &:hover {
+      background-color: colors.$GRAY1;
+    }
+  }
+}
+
+.darkMode {
+  color: colors.$GRAY0;
+  background-color: colors.$BG_DARK;
+
+  .themeButton {
+    fill: colors.$GRAY0;
+
+    &:hover {
+      background-color: colors.$GRAY7;
+    }
+  }
+
+  .hello {
+    color: colors.$GRAY0;
+  }
 }
