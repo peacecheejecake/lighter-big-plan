@@ -1,5 +1,31 @@
 @use 'styles/constants/colors';
 
+.lightMode {
+  color: colors.$GRAY9;
+  background-color: colors.$WHITE;
+
+  .addIcon {
+    fill: colors.$GRAY9;
+
+    &:hover {
+      background-color: colors.$GRAY2;
+    }
+  }
+}
+
+.darkMode {
+  color: colors.$GRAY0;
+  background-color: colors.$GRAY9;
+
+  .addIcon {
+    fill: colors.$GRAY0;
+
+    &:hover {
+      background-color: colors.$GRAY7;
+    }
+  }
+}
+
 .card {
   width: 90%;
   max-height: calc(100vh - 180px);
@@ -19,13 +45,8 @@
     .addIcon {
       cursor: pointer;
       border-radius: 5px;
-      fill: colors.$GRAY9;
       transform: scale(50%);
       transform-origin: bottom;
-
-      &:hover {
-        background-color: colors.$GRAY1;
-      }
     }
   }
 
@@ -36,14 +57,4 @@
       margin-bottom: 20px;
     }
   }
-}
-
-.lightMode {
-  color: colors.$GRAY9;
-  background-color: colors.$WHITE;
-}
-
-.darkMode {
-  color: colors.$GRAY0;
-  background-color: colors.$GRAY9;
 }
