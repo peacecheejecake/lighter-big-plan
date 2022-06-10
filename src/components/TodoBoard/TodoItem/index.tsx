@@ -65,7 +65,6 @@ export default function TodoItem({ item }: TodoItemProps) {
         setEditingItemIdx(-1);
         break;
       case 'Enter':
-        event.stopPropagation();
         break;
     }
   };

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState } from 'recoil';
 import cx from 'classnames';
 
 import type { KeyboardEvent, Dispatch, SetStateAction } from 'react';
@@ -9,7 +9,6 @@ import { colors } from 'store/constants';
 import { categoryListState } from 'components/TodoBoard/_states';
 import { useEditingItem } from 'components/TodoBoard/_hooks/useEditingItem';
 import { useInputChange } from 'hooks/useInputChange';
-// import { boundingRectState } from 'components/TodoBoard/_states/boundingRectState';
 import { useExpandDirection } from 'components/TodoBoard/TodoItem/_hooks/useExpandDirection';
 import ColorIndicator from './ColorIndicator';
 import styles from './categoryMenu.module.scss';
@@ -17,13 +16,10 @@ import styles from './categoryMenu.module.scss';
 export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
   const [, setItem] = useEditingItem();
   const [categories, setCategories] = useRecoilState(categoryListState);
-  // const globalBoundingRect = useRecoilValue(boundingRectState);
 
   const [topIdx, setTopIdx] = useState(0);
-  // const [expandToUp, setExpandToUp] = useState(false);
   const [inputValue, setInputValue, handleInputChange] = useInputChange<HTMLInputElement>();
   const inputRef = useRef<HTMLInputElement>(null);
-  // const containerRef = useRef<HTMLUListElement>(null);
 
   const { containerRef, expandToUp } = useExpandDirection<HTMLUListElement>();
 
@@ -31,8 +27,8 @@ export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
     setItem((prev) => ({ ...prev, categoryId: topIdx }));
   }, [topIdx, setItem, setIsOpen]);
 
-  const handleClickItem = (e: React.MouseEvent<HTMLElement>) => {
-    const { dropIdx } = e.currentTarget.dataset;
+  const handleClickItem = (event: React.MouseEvent<HTMLElement>) => {
+    const { dropIdx } = event.currentTarget.dataset;
     if (dropIdx === undefined) return;
     setTopIdx(Number(dropIdx));
     setTimeout(() => {
@@ -40,13 +36,18 @@ export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
     }, 0);
   };
 
-  const handleClickAddMenu = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!inputRef.current || e.currentTarget.contains(document.activeElement)) return;
+  const handleClickAddMenu = (event: React.MouseEvent<HTMLDivElement>) => {
+    if (!inputRef.current || event.currentTarget.contains(document.activeElement)) return;
     inputRef.current.focus();
   };
 
-  const handleEnterKeyPress = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') addItem();
+  const handleEnterKeyPress = (event: KeyboardEvent<HTMLInputElement>) => {
+    switch (event.key) {
+      case 'Enter':
+        event.preventDefault();
+        addItem();
+        break;
+    }
   };
 
   const addItem = () => {

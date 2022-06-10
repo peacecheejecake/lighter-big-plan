@@ -25,8 +25,12 @@ export default function TodoBoard() {
     (event: KeyboardEvent) => {
       switch (event.key) {
         case 'Enter':
-          event.preventDefault();
+          if ((event.target as HTMLElement).tagName === 'TEXTAREA') {
+            break;
+          }
+
           setNewItemIdx(selectedItemIdx + 1);
+          event.preventDefault();
           break;
       }
     },
