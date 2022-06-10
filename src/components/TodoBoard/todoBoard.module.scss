@@ -32,5 +32,9 @@
 
   .todos {
     min-height: 30vh;
+
+    &:last-child {
+      margin-bottom: 20px;
+    }
   }
 }
