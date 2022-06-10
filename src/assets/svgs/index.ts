@@ -5,3 +5,5 @@ export { ReactComponent as CalendarIcon } from './calendar.svg';
 export { ReactComponent as CategoryIcon } from './category.svg';
 export { ReactComponent as DropIcon } from './expand_more.svg';
 export { ReactComponent as AddIcon } from './add.svg';
+export { ReactComponent as ArrowBackIcon } from './arrow_back.svg';
+export { ReactComponent as ArrowForwardIcon } from './arrow_forward.svg';

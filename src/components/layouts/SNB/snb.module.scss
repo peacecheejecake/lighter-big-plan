@@ -1,9 +1,56 @@
 @use 'styles/constants/colors';
 @use 'styles/constants/levels';
 
-.snbWrapper {
+.open {
   width: 280px;
+}
+
+.closed {
+  width: 0.1px;
+}
+
+.wrapper {
+  position: relative;
   min-height: calc(100vh - 20px);
   background-color: colors.$WHITE;
   border-right: 1px solid colors.$GRAY5;
+  transition: 150ms;
+
+  .rightEdge {
+    position: absolute;
+    right: 0;
+    z-index: levels.$SNB;
+    width: 10px;
+    height: 100%;
+    cursor: pointer;
+    transition: 150ms;
+    transform: translateX(100%);
+
+    .folder {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      margin: auto;
+      color: colors.$GRAY5;
+      background-color: colors.$WHITE;
+      border: 1px solid colors.$GRAY5;
+      border-radius: 50%;
+      opacity: 0;
+      transition: 150ms;
+    }
+
+    &:hover {
+      background-color: rgba(colors.$GRAY9, 10%);
+
+      .folder {
+        opacity: 1;
+      }
+    }
+  }
 }
