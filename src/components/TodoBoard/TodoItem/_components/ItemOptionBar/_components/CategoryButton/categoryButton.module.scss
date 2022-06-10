@@ -1,0 +1,10 @@
+@use 'styles/constants/colors';
+
+.category {
+  position: relative;
+  margin-right: 5px;
+
+  .iconOpen {
+    fill: colors.$GRAY9 !important;
+  }
+}

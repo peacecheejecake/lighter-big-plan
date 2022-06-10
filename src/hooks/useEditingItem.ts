@@ -11,7 +11,10 @@ export const useEditingItem = () => {
   const setItem = useCallback(
     (newItem: Item | ((prevItem: Item) => Item)) => {
       const mod = typeof newItem === 'function' ? newItem : () => newItem;
-      setItemList((prevList) => prevList.map((listItem, idx) => (idx === editingItemIdx ? mod(listItem) : listItem)));
+
+      setTimeout(() => {
+        setItemList((prevList) => prevList.map((listItem, idx) => (idx === editingItemIdx ? mod(listItem) : listItem)));
+      }, 0);
     },
     [editingItemIdx, setItemList]
   );

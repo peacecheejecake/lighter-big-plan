@@ -15,6 +15,7 @@
   }
 
   .buttons {
+    position: relative;
     display: flex;
 
     svg {
@@ -26,9 +27,18 @@
       }
     }
 
-    .category {
-      position: relative;
-      margin-right: 5px;
+    // .category {
+    //   position: relative;
+    //   margin-right: 5px;
+    // }
+
+    .leftDatePicker {
+      left: 0;
+    }
+
+    .rightDatePicker {
+      right: 0;
+      transform-origin: top right;
     }
   }
 }

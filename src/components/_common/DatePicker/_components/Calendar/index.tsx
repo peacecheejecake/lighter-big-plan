@@ -11,7 +11,7 @@ import { useCalendarBounds } from 'hooks/useCalendarBounds';
 import { useEditingItem } from 'hooks/useEditingItem';
 import styles from './calendar.module.scss';
 
-export default function Calendar({ setIsOpen }: DatePickerProps) {
+export default function Calendar({ setIsOpen, className }: DatePickerProps) {
   const [item, setItem] = useEditingItem();
 
   const [value, setValue] = useState(toYearMonth((item as Item).start));
@@ -71,12 +71,14 @@ export default function Calendar({ setIsOpen }: DatePickerProps) {
         setItem((prev) => ({ ...prev, start: selectedStart, end: dayOnClick }));
       }
 
-      setIsOpen(false);
+      setTimeout(() => {
+        setIsOpen(false);
+      }, 50);
     }
   };
 
   return (
-    <div className={styles.calenderWrapper}>
+    <div className={cx(styles.calenderWrapper, className)}>
       <div className={styles.month}>
         <button type="button" className={styles.toNextMonth} onClick={handleClickPrevMonth}>
           <DropIcon className={styles.toLeft} />
@@ -120,4 +122,5 @@ export default function Calendar({ setIsOpen }: DatePickerProps) {
 
 interface DatePickerProps {
   setIsOpen: Dispatch<SetStateAction<boolean>>;
+  className?: string;
 }

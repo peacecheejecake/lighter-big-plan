@@ -14,11 +14,11 @@ export default function DatePicker({ Icon, title = '', className }: DatePickerPr
 
   return (
     <div className={styles.datePicker} ref={containerRef}>
-      <button type="button" className={cx(styles.button, className)} onClick={handleClickButton}>
-        {Icon && <Icon className={styles.icon} />}
-        {title && <span className={styles.title}>{title}</span>}
+      <button type="button" className={styles.button} onClick={handleClickButton}>
+        {Icon && <Icon className={cx(styles.icon, { [styles.iconOpen]: isOpen })} />}
+        {title && <span className={cx(styles.title, { [styles.titleOpen]: isOpen })}>{title}</span>}
       </button>
-      {isOpen && <Calendar setIsOpen={setIsOpen} />}
+      {isOpen && <Calendar setIsOpen={setIsOpen} className={className} />}
     </div>
   );
 }

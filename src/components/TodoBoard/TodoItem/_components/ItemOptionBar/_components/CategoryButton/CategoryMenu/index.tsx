@@ -25,10 +25,12 @@ export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
   }, [topIdx, setItem, setIsOpen]);
 
   const handleClickItem = (e: React.MouseEvent<HTMLElement>) => {
-    const { idx } = e.currentTarget.dataset;
-    if (idx === undefined) return;
-    setTopIdx(Number(idx));
-    setIsOpen(false);
+    const { dropIdx } = e.currentTarget.dataset;
+    if (dropIdx === undefined) return;
+    setTopIdx(Number(dropIdx));
+    setTimeout(() => {
+      setIsOpen(false);
+    }, 0);
   };
 
   const handleClickAddMenu = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -53,19 +55,20 @@ export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
 
   return (
     <ul className={styles.dropMenu}>
-      {[...categories.slice(0, topIdx), ...categories.slice(topIdx + 1)].map(({ color, name }, idx) => {
+      {categories.map(({ color, name }, idx) => {
         const key = `className-${name}-${idx}`;
+
         return (
           <li
             className={cx(styles.menu, {
               [styles.roundTop]: idx === 0,
-              [styles.roundBottom]: idx === categories.length - 2,
+              // [styles.roundBottom]: idx === categories.length - 2,
             })}
             key={key}
           >
             <div
               className={styles.itemWrapper}
-              data-idx={idx >= topIdx ? idx + 1 : idx}
+              data-drop-idx={idx >= topIdx ? idx + 1 : idx}
               onClick={handleClickItem}
               role="menuitem"
               tabIndex={-1}

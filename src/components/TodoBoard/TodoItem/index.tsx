@@ -94,7 +94,7 @@ export default function TodoItem({ item }: TodoItemProps) {
             value={title}
             placeholder="Empty Title"
             ref={titleRef}
-            data-idx={item.id}
+            data-board-idx={item.id}
           />
           {isEditing && (
             <>

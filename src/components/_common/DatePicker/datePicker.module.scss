@@ -19,10 +19,18 @@
       }
     }
 
+    .iconOpen {
+      fill: colors.$GRAY9;
+    }
+
     .title {
       font-size: 14px;
       line-height: 14px;
       color: colors.$GRAY5;
+    }
+
+    .titleOpen {
+      color: colors.$GRAY9;
     }
   }
 

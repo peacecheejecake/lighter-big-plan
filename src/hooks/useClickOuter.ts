@@ -8,12 +8,12 @@ export const useClickOuter = <T extends HTMLElement>(onClose?: () => void) => {
     (event: MouseEvent) => {
       if (!containerRef.current) return;
 
-      if (!containerRef.current.contains(event.target as Node)) {
+      if (openState && !containerRef.current.contains(event.target as Node)) {
         setOpenState(false);
         if (onClose) onClose();
       }
     },
-    [onClose, setOpenState]
+    [onClose, setOpenState, openState]
   );
 
   useEffect(() => {

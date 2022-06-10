@@ -48,14 +48,11 @@ export default function TodoBoard() {
       if (!ref.current) return;
 
       const { target } = event;
-      const { idx } = (target as HTMLElement).dataset;
+      const { boardIdx } = (target as HTMLElement).dataset;
 
-      if (idx) {
-        setSelectedItemIdx(Number(idx));
-      } else if (
-        (!ref.current.contains(target as Node | null) || ref.current === target) &&
-        target !== addRef.current
-      ) {
+      if (boardIdx) {
+        setSelectedItemIdx(Number(boardIdx));
+      } else if ((!ref.current.contains(target as Node) || target === ref.current) && target !== addRef.current) {
         setSelectedItemIdx(-1);
         setEditingItemIdx(-1);
         setNewItemIdx(-1);
@@ -63,6 +60,7 @@ export default function TodoBoard() {
     };
 
     document.addEventListener('click', handleClickBounded);
+
     return () => document.removeEventListener('click', handleClickBounded);
   }, [setSelectedItemIdx, setEditingItemIdx]);
 
@@ -90,7 +88,7 @@ export default function TodoBoard() {
         Quick Todo
         <AddIcon className={styles.addIcon} onClick={handleClickAdd} ref={addRef} />
       </p>
-      <div className={styles.todos} role="menuitem" tabIndex={-1} ref={ref}>
+      <div className={styles.todos} role="menu" tabIndex={-1} ref={ref}>
         {itemList.map((item) => (
           <TodoItem key={item.id} item={item} />
         ))}
