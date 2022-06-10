@@ -3,12 +3,29 @@
 @use 'styles/mixins/flexbox';
 @use 'styles/mixins/animation';
 
+.lightMode {
+  color: colors.$GRAY9;
+  background-color: colors.$BG_W;
+
+  .menu:hover {
+    background-color: rgba(colors.$GRAY5, 10%);
+  }
+}
+
+.darkMode {
+  color: colors.$GRAY0;
+  background-color: colors.$BG_DARK;
+
+  .menu:hover {
+    background-color: rgba(colors.$GRAY5, 10%);
+  }
+}
+
 .dropMenu {
   position: absolute;
   left: -100px;
   z-index: 1000;
   width: 150px;
-  background-color: colors.$GRAY0;
   border: 1px solid colors.$GRAY5;
   border-radius: 10px;
   animation: 150ms fadeIn;
@@ -23,10 +40,6 @@
   width: 100%;
   height: 40px;
   cursor: pointer;
-
-  &:hover {
-    background-color: rgba(colors.$GRAY5, 50%);
-  }
 }
 
 .addMenu:hover {

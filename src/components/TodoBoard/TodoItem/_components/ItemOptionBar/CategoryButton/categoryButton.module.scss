@@ -1,16 +1,23 @@
 @use 'styles/constants/colors';
 
-.category {
-  position: relative;
-  margin-right: 5px;
-
+.lightMode {
   .iconOpen {
     fill: colors.$GRAY9 !important;
   }
 }
 
+.darkMode {
+  .iconOpen {
+    fill: colors.$GRAY0 !important;
+  }
+}
+
+.category {
+  position: relative;
+  margin-right: 5px;
+}
+
 .expandToUp {
   -webkit-transform-origin-y: bottom;
   top: -350px;
-  background-color: violet;
 }

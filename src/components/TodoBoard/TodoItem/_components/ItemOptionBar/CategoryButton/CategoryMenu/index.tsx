@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import cx from 'classnames';
 
 import type { KeyboardEvent, Dispatch, SetStateAction } from 'react';
@@ -10,10 +10,13 @@ import { categoryListState } from 'components/TodoBoard/_states';
 import { useEditingItem } from 'components/TodoBoard/_hooks/useEditingItem';
 import { useInputChange } from 'hooks/useInputChange';
 import { useExpandDirection } from 'components/TodoBoard/TodoItem/_hooks/useExpandDirection';
+import { darkModeState } from 'store/states/themeState';
 import ColorIndicator from './ColorIndicator';
 import styles from './categoryMenu.module.scss';
 
 export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
+  const darkMode = useRecoilValue(darkModeState);
+
   const [, setItem] = useEditingItem();
   const [categories, setCategories] = useRecoilState(categoryListState);
 
@@ -61,8 +64,10 @@ export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
     setInputValue('');
   };
 
+  const themeClassName = darkMode ? styles.darkMode : styles.lightMode;
+
   return (
-    <ul className={cx(styles.dropMenu, { [styles.expandToUp]: expandToUp })} ref={containerRef}>
+    <ul className={cx(styles.dropMenu, themeClassName, { [styles.expandToUp]: expandToUp })} ref={containerRef}>
       {categories.map(({ color, name }, idx) => {
         const key = `className-${name}-${idx}`;
 
