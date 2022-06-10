@@ -27,6 +27,12 @@
       font-size: 14px;
       line-height: 14px;
       color: colors.$GRAY5;
+      user-select: none;
+
+      &::selection {
+        color: inherit;
+        background-color: transparent;
+      }
     }
 
     .titleOpen {

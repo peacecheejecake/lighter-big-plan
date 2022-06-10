@@ -5,7 +5,6 @@
 
 .dropMenu {
   position: absolute;
-  top: 30px;
   left: -100px;
   z-index: 1000;
   width: 150px;
@@ -13,6 +12,11 @@
   border: 1px solid colors.$GRAY5;
   border-radius: 10px;
   animation: 150ms fadeIn;
+}
+
+.expandToUp {
+  top: 0;
+  transform: translateY(-100%);
 }
 
 .menu {

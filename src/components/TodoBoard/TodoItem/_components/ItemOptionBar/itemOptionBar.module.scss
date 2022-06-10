@@ -27,18 +27,16 @@
       }
     }
 
-    // .category {
-    //   position: relative;
-    //   margin-right: 5px;
-    // }
-
     .leftDatePicker {
       left: 0;
+      -ms-transform-origin-x: left;
+      -webkit-transform-origin-x: left;
     }
 
     .rightDatePicker {
       right: 0;
-      transform-origin: top right;
+      -ms-transform-origin-x: right;
+      -webkit-transform-origin-x: right;
     }
   }
 }

@@ -1,10 +1,11 @@
 import { useEffect, useRef, useMemo } from 'react';
 import { useRecoilState, useSetRecoilState } from 'recoil';
 import cx from 'classnames';
+
 import type { ChangeEvent, KeyboardEvent } from 'react';
 
 import { CheckIcon } from 'assets/svgs';
-import { editingItemIdxState, itemListState, selectedItemIdxState } from 'store/atoms';
+import { editingItemIdxState, itemListState, selectedItemIdxState } from 'components/TodoBoard/_states';
 import { useInputChange } from 'hooks/useInputChange';
 import ItemOptionBar from './_components/ItemOptionBar';
 import styles from './todoItem.module.scss';
@@ -62,6 +63,9 @@ export default function TodoItem({ item }: TodoItemProps) {
     switch (event.key) {
       case 'Escape':
         setEditingItemIdx(-1);
+        break;
+      case 'Enter':
+        event.stopPropagation();
         break;
     }
   };

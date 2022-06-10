@@ -73,7 +73,7 @@
       width: 100%;
 
       .title {
-        padding: 0 5px;
+        padding: 0 10px;
         line-height: 36px;
         cursor: pointer;
         user-select: unset;
@@ -133,9 +133,11 @@
 
       textarea {
         all: unset;
-        padding: 0 10px;
+        height: 75px;
+        padding: 10px;
         margin: 5px 0 10px;
         overflow-y: scroll;
+        line-height: 1;
         text-overflow: clip;
         border-radius: 3px;
         transition: 150ms;

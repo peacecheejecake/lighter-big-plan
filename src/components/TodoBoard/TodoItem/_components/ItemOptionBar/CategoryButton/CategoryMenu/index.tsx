@@ -1,24 +1,31 @@
 import { useState, useEffect, useRef } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import cx from 'classnames';
 
 import type { KeyboardEvent, Dispatch, SetStateAction } from 'react';
 
 import { AddIcon } from 'assets/svgs';
 import { colors } from 'store/constants';
-import { categoryListState } from 'store/atoms';
-import { useEditingItem } from 'hooks/useEditingItem';
+import { categoryListState } from 'components/TodoBoard/_states';
+import { useEditingItem } from 'components/TodoBoard/_hooks/useEditingItem';
 import { useInputChange } from 'hooks/useInputChange';
+// import { boundingRectState } from 'components/TodoBoard/_states/boundingRectState';
+import { useExpandDirection } from 'components/TodoBoard/TodoItem/_hooks/useExpandDirection';
 import ColorIndicator from './ColorIndicator';
 import styles from './categoryMenu.module.scss';
 
 export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
   const [, setItem] = useEditingItem();
   const [categories, setCategories] = useRecoilState(categoryListState);
+  // const globalBoundingRect = useRecoilValue(boundingRectState);
 
   const [topIdx, setTopIdx] = useState(0);
+  // const [expandToUp, setExpandToUp] = useState(false);
   const [inputValue, setInputValue, handleInputChange] = useInputChange<HTMLInputElement>();
   const inputRef = useRef<HTMLInputElement>(null);
+  // const containerRef = useRef<HTMLUListElement>(null);
+
+  const { containerRef, expandToUp } = useExpandDirection<HTMLUListElement>();
 
   useEffect(() => {
     setItem((prev) => ({ ...prev, categoryId: topIdx }));
@@ -54,7 +61,7 @@ export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
   };
 
   return (
-    <ul className={styles.dropMenu}>
+    <ul className={cx(styles.dropMenu, { [styles.expandToUp]: expandToUp })} ref={containerRef}>
       {categories.map(({ color, name }, idx) => {
         const key = `className-${name}-${idx}`;
 

@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import { FunctionComponent, SVGProps } from 'react';
+import type { FunctionComponent, SVGProps, MouseEvent } from 'react';
 
 import { useClickOuter } from 'hooks/useClickOuter';
 import Calendar from './_components/Calendar';
@@ -8,8 +8,9 @@ import styles from './datePicker.module.scss';
 export default function DatePicker({ Icon, title = '', className }: DatePickerProps) {
   const [isOpen, setIsOpen, containerRef] = useClickOuter<HTMLDivElement>();
 
-  const handleClickButton = () => {
+  const handleClickButton = (event: MouseEvent<HTMLButtonElement>) => {
     setIsOpen((prev) => !prev);
+    console.log(containerRef.current?.getBoundingClientRect());
   };
 
   return (

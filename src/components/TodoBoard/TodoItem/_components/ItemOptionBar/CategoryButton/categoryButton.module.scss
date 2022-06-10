@@ -8,3 +8,9 @@
     fill: colors.$GRAY9 !important;
   }
 }
+
+.expandToUp {
+  -webkit-transform-origin-y: bottom;
+  top: -350px;
+  background-color: violet;
+}

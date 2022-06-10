@@ -1,18 +1,23 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
+import cx from 'classnames';
 
 import TodoItem from 'components/TodoBoard/TodoItem';
-import { itemListState, editingItemIdxState, selectedItemIdxState } from 'store/atoms';
+import { itemListState, editingItemIdxState, selectedItemIdxState } from 'components/TodoBoard/_states';
 import { AddIcon } from 'assets/svgs';
 import { createNewItem } from './TodoItem/_services';
 import styles from './todoBoard.module.scss';
+import { boundingRectState } from './_states/boundingRectState';
 
 export default function TodoBoard() {
   const [itemList, setItemList] = useRecoilState(itemListState);
   const [editingItemIdx, setEditingItemIdx] = useRecoilState(editingItemIdxState);
   const [selectedItemIdx, setSelectedItemIdx] = useRecoilState(selectedItemIdxState);
+  const setBoundingRect = useSetRecoilState(boundingRectState);
+
   const [newItemIdx, setNewItemIdx] = useState(-1);
 
+  // const containerRef = useRef<HTMLDivElement>(null);
   const ref = useRef<HTMLDivElement>(null);
   const addRef = useRef<SVGSVGElement>(null);
 
@@ -82,8 +87,13 @@ export default function TodoBoard() {
     }
   }, [selectedItemIdx, editingItemIdx, setEditingItemIdx]);
 
+  useEffect(() => {
+    if (!ref.current) return;
+    setBoundingRect(ref.current.getBoundingClientRect());
+  }, [ref, setBoundingRect, itemList]);
+
   return (
-    <>
+    <article className={cx(styles.card)}>
       <p className={styles.title}>
         Quick Todo
         <AddIcon className={styles.addIcon} onClick={handleClickAdd} ref={addRef} />
@@ -93,6 +103,6 @@ export default function TodoBoard() {
           <TodoItem key={item.id} item={item} />
         ))}
       </div>
-    </>
+    </article>
   );
 }

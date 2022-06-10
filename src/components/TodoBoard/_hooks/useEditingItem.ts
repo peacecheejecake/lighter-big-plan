@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 import { useRecoilValue, useRecoilState } from 'recoil';
-import { editingItemIdxState, itemListState } from 'store/atoms';
+import { editingItemIdxState, itemListState } from '../_states';
 
 export const useEditingItem = () => {
   const editingItemIdx = useRecoilValue(editingItemIdxState);

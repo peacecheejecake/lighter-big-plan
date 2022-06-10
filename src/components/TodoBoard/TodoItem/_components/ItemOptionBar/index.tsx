@@ -1,8 +1,8 @@
 import { useRecoilValue } from 'recoil';
 import { CalendarIcon } from 'assets/svgs';
-import { editingItemIdxState, itemListState } from 'store/atoms';
+import { editingItemIdxState, itemListState } from 'components/TodoBoard/_states';
 import DatePicker from 'components/_common/DatePicker';
-import { CategoryButton } from './_components';
+import CategoryButton from './CategoryButton';
 import styles from './itemOptionBar.module.scss';
 
 export default function ItemOptionBar() {
@@ -12,16 +12,14 @@ export default function ItemOptionBar() {
   const { start, end } = itemList[editingItemIdx];
 
   const duration = `${start ? start.format('YYYY-MM-DD') : ''}${end ? ` ~ ${end.format('YYYY-MM-DD')}` : ''}`;
-  // const Icon = !duration ? CalendarIcon : undefined;
 
   return (
     <div className={styles.itemOptionBar}>
       <div className={styles.buttons}>
         <CategoryButton />
         {!duration && <DatePicker Icon={CalendarIcon} className={styles.rightDatePicker} />}
-        {/* <DatePicker Icon={Icon} title={duration} /> */}
       </div>
-      {duration && <DatePicker title={duration} />}
+      {duration && <DatePicker title={duration} className={styles.leftDatePicker} />}
     </div>
   );
 }
