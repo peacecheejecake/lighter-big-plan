@@ -25,7 +25,7 @@ export default function SNB() {
       </div>
       <div className={styles.rightEdge} onClick={toggleIsOpen} role="button" tabIndex={-1}>
         <div className={styles.folder}>
-          <Icon />
+          <Icon className={styles.arrowIcon} />
         </div>
       </div>
     </nav>

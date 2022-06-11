@@ -1,37 +1,10 @@
 @use 'styles/constants/colors';
 @use 'styles/constants/levels';
 
-.open {
-  width: 300px;
-}
-
-.closed {
-  width: 0.1px;
-}
-
-.lightMode {
-  color: colors.$GRAY9;
-  background-color: colors.$BG_W;
-
-  svg {
-    fill: colors.$GRAY9;
-  }
-}
-
-.darkMode {
-  color: colors.$GRAY0;
-  background-color: colors.$BG_DARK;
-
-  svg {
-    fill: colors.$GRAY0;
-  }
-}
-
 .wrapper {
   position: relative;
   height: 100vh;
   background-color: colors.$WHITE;
-  border-right: 1px solid colors.$GRAY5;
   transition: 150ms;
 
   .snbMenu {
@@ -43,20 +16,18 @@
 
   .rightEdge {
     position: absolute;
-    top: 0;
+    top: 80px;
     right: 0;
     z-index: levels.$SNB;
     width: 10px;
-    height: 100%;
+    height: calc(100% - 80px);
     cursor: pointer;
     transition: 150ms;
-    transform: translateX(100%);
 
     .folder {
       position: absolute;
       top: 0;
       bottom: 0;
-      left: 0;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -78,5 +49,57 @@
         opacity: 1;
       }
     }
+  }
+}
+
+.open {
+  width: 300px;
+
+  .rightEdge {
+    transform: translateX(50%);
+
+    .folder {
+      left: -10px;
+    }
+  }
+}
+
+.closed {
+  width: 0;
+
+  .rightEdge {
+    transform: translateX(100%);
+
+    .folder {
+      left: 0;
+    }
+  }
+}
+
+.lightMode {
+  color: colors.$GRAY9;
+  background-color: colors.$BG_W;
+  // border-right: 1px solid colors.$GRAY5;
+
+  svg {
+    fill: colors.$GRAY9;
+  }
+
+  .rightEdge:hover {
+    background-color: rgba(colors.$GRAY9, 10%);
+  }
+}
+
+.darkMode {
+  color: colors.$GRAY0;
+  background-color: colors.$BG_DARK;
+  // border-right: 1px solid colors.$GRAY7;
+
+  svg:not(.arrowIcon) {
+    fill: colors.$GRAY0;
+  }
+
+  .rightEdge:hover {
+    background-color: rgba(colors.$GRAY0, 10%);
   }
 }
