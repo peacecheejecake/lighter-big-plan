@@ -3,25 +3,34 @@
 .button {
   width: 100%;
   height: 52px;
-  padding: 0 20px;
   margin: 4px 0;
   border-radius: 10px;
+  transition: 100ms;
+
+  &::selection {
+    all: none;
+  }
 
   .inner {
     display: flex;
     align-items: center;
     justify-content: baseline;
+    width: 100%;
+    height: 100%;
+    padding: 0 20px;
   }
 
   .icon {
     margin-right: 18px;
     fill: colors.$GRAY5;
+    transition: 50ms;
     transform: scale(0.9);
   }
 
   .title {
     font-size: 15px;
     color: colors.$GRAY5;
+    transition: 50ms;
   }
 
   &:hover {
