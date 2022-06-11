@@ -31,3 +31,9 @@ export const getCalendarBoundsFromDate = (date?: string | Dayjs) => {
     lastDayOffset,
   };
 };
+
+export const generateRandomDate = () => {
+  const start = dayjs().subtract(1, 'year');
+  const end = start.add(Math.floor(Math.random() * 365), 'day');
+  return [start, end];
+};
