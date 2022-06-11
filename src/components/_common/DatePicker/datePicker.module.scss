@@ -8,7 +8,20 @@
   cursor: pointer;
   transition: 100ms;
 
-  .button {
+  .cancelButton {
+    display: flex;
+    align-items: center;
+    margin-right: 3px;
+    opacity: 0;
+    transition: 100ms;
+
+    svg {
+      fill: colors.$GRAY5;
+      transform: scale(0.7);
+    }
+  }
+
+  .pickerButton {
     .icon {
       margin-right: 5px;
       fill: colors.$GRAY5;
@@ -32,19 +45,21 @@
     }
   }
 
-  &:hover {
-    .title {
-      color: colors.$GRAY9;
-    }
+  &:hover .cancelButton {
+    opacity: 1;
   }
 }
 
 .lightMode {
-  &:hover .title {
+  .title:hover {
     color: colors.$GRAY9;
   }
 
-  .button {
+  .cancelButton svg:hover {
+    fill: colors.$GRAY9;
+  }
+
+  .pickerButton {
     .titleOpen {
       color: colors.$GRAY9;
     }
@@ -56,11 +71,15 @@
 }
 
 .darkMode {
-  &:hover .title {
-    color: colors.$GRAY0;
+  .title:hover {
+    color: colors.$GRAY9;
   }
 
-  .button {
+  .cancelButton svg:hover {
+    fill: colors.$GRAY0;
+  }
+
+  .pickerButton {
     .titleOpen {
       color: colors.$GRAY0;
     }
