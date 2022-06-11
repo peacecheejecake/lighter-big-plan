@@ -13,7 +13,7 @@ export default function CategoryButton() {
   const darkMode = useRecoilValue(darkModeState);
   const [isOpen, setIsOpen, continerRef] = useClickOuter<HTMLDivElement>();
 
-  const handleClickButton = (event: MouseEvent<HTMLButtonElement>) => {
+  const handleClickButton = () => {
     setIsOpen((prev) => !prev);
   };
 

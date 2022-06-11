@@ -26,9 +26,11 @@ export default function TodoItem({ item }: TodoItemProps) {
   const isEditing = useMemo(() => editingItemIdx === item.id, [editingItemIdx, item]);
   const isSelected = useMemo(() => selectedItemIdx === item.id, [selectedItemIdx, item]);
 
-  // useEffect(() => {
-  //   checkRef.current?.classList.remove(styles.initial);
-  // }, []);
+  useEffect(() => {
+    setTimeout(() => {
+      checkRef.current?.classList.remove(styles.initial);
+    });
+  }, []);
 
   useEffect(() => {
     setTitle(item.title);
