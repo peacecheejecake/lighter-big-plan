@@ -9,3 +9,6 @@ export { ReactComponent as ArrowBackIcon } from './arrow_back.svg';
 export { ReactComponent as ArrowForwardIcon } from './arrow_forward.svg';
 export { ReactComponent as DarkModeIcon } from './dark_mode.svg';
 export { ReactComponent as LightModeIcon } from './light_mode.svg';
+export { ReactComponent as ChecklistIcon } from './checklist.svg';
+export { ReactComponent as DashboardIcon } from './dashboard.svg';
+export { ReactComponent as NoteIcon } from './note.svg';

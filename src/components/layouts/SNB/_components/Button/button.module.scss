@@ -1,0 +1,62 @@
+@use 'styles/constants/colors';
+
+.button {
+  width: 100%;
+  height: 52px;
+  padding: 0 20px;
+  margin: 4px 0;
+  border-radius: 10px;
+
+  .inner {
+    display: flex;
+    align-items: center;
+    justify-content: baseline;
+  }
+
+  .icon {
+    margin-right: 18px;
+    fill: colors.$GRAY5;
+    transform: scale(0.9);
+  }
+
+  .title {
+    font-size: 15px;
+    color: colors.$GRAY5;
+  }
+
+  &:hover {
+    background-color: colors.$GRAY1;
+
+    .title {
+      color: colors.$GRAY9;
+    }
+
+    .icon {
+      fill: colors.$GRAY9;
+    }
+  }
+}
+
+.current {
+  background-color: colors.$PRIMARY_6;
+
+  .title {
+    color: colors.$GRAY0;
+  }
+
+  .icon {
+    fill: colors.$GRAY0;
+  }
+
+  &:hover {
+    background-color: colors.$PRIMARY_6;
+
+    .title {
+      color: colors.$GRAY0;
+    }
+
+    .icon {
+      fill: colors.$GRAY0;
+    }
+  }
+}

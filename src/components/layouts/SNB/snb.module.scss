@@ -9,12 +9,37 @@
   width: 0.1px;
 }
 
+.lightMode {
+  color: colors.$GRAY9;
+  background-color: colors.$BG_W;
+
+  svg {
+    fill: colors.$GRAY9;
+  }
+}
+
+.darkMode {
+  color: colors.$GRAY0;
+  background-color: colors.$BG_DARK;
+
+  svg {
+    fill: colors.$GRAY0;
+  }
+}
+
 .wrapper {
   position: relative;
   min-height: 100vh;
   background-color: colors.$WHITE;
   border-right: 1px solid colors.$GRAY5;
   transition: 150ms;
+
+  .snbMenu {
+    position: relative;
+    top: 120px;
+    width: 90%;
+    margin: 0 auto;
+  }
 
   .rightEdge {
     position: absolute;
@@ -52,23 +77,5 @@
         opacity: 1;
       }
     }
-  }
-}
-
-.lightMode {
-  color: colors.$GRAY9;
-  background-color: colors.$BG_W;
-
-  svg {
-    fill: colors.$GRAY9;
-  }
-}
-
-.darkMode {
-  color: colors.$GRAY0;
-  background-color: colors.$BG_DARK;
-
-  svg {
-    fill: colors.$GRAY0;
   }
 }

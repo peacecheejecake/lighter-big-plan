@@ -10,11 +10,11 @@ export default function Routes() {
       <div className={styles.app}>
         <BrowserRouter>
           <RouterRoutes>
-            <Route path="/todos" element={<Todos />} />
-            <Route path="/notes" element={<Notes />} />
-            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="todos" element={<Todos />} />
+            <Route path="notes" element={<Notes />} />
+            <Route path="dashboard" element={<Dashboard />} />
             <Route index element={<Navigate replace to="/todos" />} />
-            <Route path="/*" element={<Navigate replace to="/" />} />
+            <Route path="*" element={<Navigate replace to="/" />} />
           </RouterRoutes>
         </BrowserRouter>
       </div>

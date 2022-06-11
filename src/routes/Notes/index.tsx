@@ -1,5 +1,6 @@
-import styles from './notes.module.scss';
+import Layout from 'components/layouts';
+// import styles from './notes.module.scss';
 
 export default function Notes() {
-  return null;
+  return <Layout />;
 }
