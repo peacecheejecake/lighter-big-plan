@@ -1,5 +1,4 @@
 export {};
-
 // interface TableKeyTypeMap {
 //   todo: (keyof Item)[];
 //   category: (keyof Category)[];
@@ -30,7 +29,7 @@ export {};
 //   query: Query<T>;
 // };
 
-// const NAME = 'db_test';
+// const NAME = 'db_dummy';
 // const VERSION = 1;
 
 // const TABLE_KEYS: TableKeyTypeMap = {
