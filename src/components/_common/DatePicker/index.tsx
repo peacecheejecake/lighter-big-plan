@@ -36,7 +36,7 @@ export default function DatePicker({ Icon, title = '', className }: DatePickerPr
         </button>
       )}
       <button type="button" className={styles.pickerButton} onClick={handleClickPickerButton}>
-        {Icon && <Icon className={cx(styles.icon, { [styles.iconOpen]: isOpen })} />}
+        {Icon && <Icon className={cx({ [styles.iconOpen]: isOpen })} />}
         {title && <span className={cx(styles.title, { [styles.titleOpen]: isOpen })}>{title}</span>}
       </button>
       {isOpen && <Calendar setIsOpen={setIsOpen} className={className} />}

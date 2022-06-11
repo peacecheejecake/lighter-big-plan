@@ -10,6 +10,22 @@
   .menu:hover {
     background-color: rgba(colors.$GRAY5, 10%);
   }
+
+  .addIcon {
+    fill: colors.$GRAY3;
+
+    &:hover {
+      fill: colors.$GRAY8;
+    }
+  }
+
+  .addTitle {
+    color: colors.$GRAY8;
+
+    &::placeholder {
+      color: colors.$GRAY3;
+    }
+  }
 }
 
 .darkMode {
@@ -18,6 +34,22 @@
 
   .menu:hover {
     background-color: rgba(colors.$GRAY5, 10%);
+  }
+
+  .addIcon {
+    fill: colors.$GRAY6;
+
+    &:hover {
+      fill: colors.$GRAY0;
+    }
+  }
+
+  .addTitle {
+    color: colors.$GRAY0;
+
+    &::placeholder {
+      color: colors.$GRAY6;
+    }
   }
 }
 
@@ -96,24 +128,13 @@
 
   .addIcon {
     border-radius: 5px;
-    fill: colors.$GRAY3;
     transition: 150ms;
     transform: scale(50%);
-
-    &:hover {
-      fill: colors.$GRAY8;
-      transform: scale(67%);
-    }
   }
 
   .addTitle {
     margin-left: 5px;
-    color: colors.$GRAY8;
     cursor: pointer;
-
-    &::placeholder {
-      color: colors.$GRAY3;
-    }
   }
 }
 

@@ -25,14 +25,10 @@
   .pickerButton {
     margin-left: 10px;
 
-    .icon {
+    svg {
       margin-right: 5px;
       fill: colors.$GRAY5;
       transition: 100ms;
-
-      &:hover {
-        fill: colors.$GRAY9;
-      }
     }
 
     .title {
@@ -83,12 +79,16 @@
     .iconOpen {
       fill: colors.$GRAY9;
     }
+
+    svg:hover {
+      fill: colors.$GRAY9;
+    }
   }
 }
 
 .darkMode {
   .title:hover {
-    color: colors.$GRAY9;
+    color: colors.$GRAY0;
   }
 
   .cancelButton svg:hover {
@@ -101,6 +101,10 @@
     }
 
     .iconOpen {
+      fill: colors.$GRAY0;
+    }
+
+    svg:hover {
       fill: colors.$GRAY0;
     }
   }
