@@ -79,7 +79,6 @@
 .lightMode {
   color: colors.$GRAY9;
   background-color: colors.$BG_W;
-  // border-right: 1px solid colors.$GRAY5;
 
   svg {
     fill: colors.$GRAY9;
@@ -105,11 +104,6 @@
 .darkMode {
   color: colors.$GRAY0;
   background-color: colors.$BG_DARK;
-  // border-right: 1px solid colors.$GRAY7;
-
-  svg:not(.arrowIcon) {
-    fill: colors.$GRAY0;
-  }
 
   .rightEdge:hover {
     background-color: rgba(colors.$GRAY0, 10%);
