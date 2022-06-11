@@ -88,6 +88,18 @@
   .rightEdge:hover {
     background-color: rgba(colors.$GRAY9, 10%);
   }
+
+  button:hover {
+    background-color: colors.$GRAY1;
+
+    .title {
+      color: colors.$GRAY9;
+    }
+
+    .icon {
+      fill: colors.$GRAY9;
+    }
+  }
 }
 
 .darkMode {
@@ -101,5 +113,17 @@
 
   .rightEdge:hover {
     background-color: rgba(colors.$GRAY0, 10%);
+  }
+
+  button:hover {
+    background-color: colors.$GRAY8;
+
+    .title {
+      color: colors.$GRAY0;
+    }
+
+    .icon {
+      fill: colors.$GRAY0;
+    }
   }
 }

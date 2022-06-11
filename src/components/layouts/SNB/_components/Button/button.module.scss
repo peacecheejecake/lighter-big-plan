@@ -32,18 +32,6 @@
     color: colors.$GRAY5;
     transition: 50ms;
   }
-
-  &:hover {
-    background-color: colors.$GRAY1;
-
-    .title {
-      color: colors.$GRAY9;
-    }
-
-    .icon {
-      fill: colors.$GRAY9;
-    }
-  }
 }
 
 .current {
@@ -58,7 +46,7 @@
   }
 
   &:hover {
-    background-color: colors.$PRIMARY_6;
+    background-color: colors.$PRIMARY_6 !important;
 
     .title {
       color: colors.$GRAY0;
