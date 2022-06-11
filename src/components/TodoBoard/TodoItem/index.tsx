@@ -21,16 +21,18 @@ export default function TodoItem({ item }: TodoItemProps) {
   const [notes, setNotes, handleChangeNotes] = useInputChange<HTMLTextAreaElement>(item.notes);
 
   const titleRef = useRef<HTMLInputElement>(null);
-  const checkRef = useRef<HTMLInputElement>(null);
+  const checkRef = useRef<HTMLLabelElement>(null);
 
   const isEditing = useMemo(() => editingItemIdx === item.id, [editingItemIdx, item]);
   const isSelected = useMemo(() => selectedItemIdx === item.id, [selectedItemIdx, item]);
 
   useEffect(() => {
-    setTimeout(() => {
-      checkRef.current?.classList.remove(styles.initial);
-    });
-  }, []);
+    if (!checkRef.current) return;
+
+    if (item.done && !checkRef.current.classList.contains(styles.animatedUnset)) {
+      checkRef.current.classList.add(styles.animatedUnset);
+    }
+  }, [item.done]);
 
   useEffect(() => {
     setTitle(item.title);
@@ -83,8 +85,8 @@ export default function TodoItem({ item }: TodoItemProps) {
       })}
     >
       <form action="" method="get" className={styles.form}>
-        <input id={`checkbox-${item.id}`} type="checkbox" onChange={handleClickDone} ref={checkRef} />
-        <label htmlFor={`checkbox-${item.id}`} className={cx(styles.checkmark, styles.initial)}>
+        <input id={`checkbox-${item.id}`} type="checkbox" onChange={handleClickDone} />
+        <label htmlFor={`checkbox-${item.id}`} className={styles.checkmark} ref={checkRef}>
           <CheckIcon className={styles.icon} />
         </label>
         <div

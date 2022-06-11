@@ -36,7 +36,6 @@
       transition: 100ms;
 
       .icon {
-        opacity: 0;
         fill: colors.$GRAY4;
         transition: 100ms;
         transform: scale(80%);
@@ -44,27 +43,15 @@
       }
     }
 
-    .initial {
-      animation-duration: 0;
-    }
-
     input[type='checkbox']:checked + .checkmark {
       border: none;
       animation: setDone 150ms;
       animation-fill-mode: both;
-
-      .icon {
-        opacity: 1;
-      }
     }
 
-    input[type='checkbox']:not(:checked) + .checkmark {
+    .animatedUnset {
       animation: unsetDone 150ms;
       animation-fill-mode: both;
-
-      .icon {
-        opacity: 1;
-      }
     }
 
     .detail {
