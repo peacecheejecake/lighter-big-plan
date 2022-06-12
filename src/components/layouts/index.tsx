@@ -1,14 +1,13 @@
-import { useRecoilValue } from 'recoil';
-
 import type { PropsWithChildren } from 'react';
 
+import { useRecoil } from 'hooks';
 import { darkModeState } from 'store/states/themeState';
 import GNB from './GNB';
 import SNB from './SNB';
 import styles from './layouts.module.scss';
 
 export default function Layout({ children }: LayoutRouteProps) {
-  const darkMode = useRecoilValue(darkModeState);
+  const [darkMode] = useRecoil(darkModeState);
 
   return (
     <>

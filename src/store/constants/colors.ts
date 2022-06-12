@@ -6,4 +6,4 @@ const colors = {
   violet: '#7048e8',
 } as const;
 
-type Color = typeof colors[keyof typeof colors];
+export const allColors: Color[] = [colors.blue, colors.teal, colors.red, colors.pink, colors.violet];
