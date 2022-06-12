@@ -1,0 +1,8 @@
+@use 'styles/constants/colors';
+
+.description {
+  margin-bottom: 55px;
+  font-size: 35px;
+  color: colors.$GRAY0;
+  text-align: center;
+}

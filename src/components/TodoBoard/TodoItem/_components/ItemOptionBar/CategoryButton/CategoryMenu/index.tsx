@@ -5,7 +5,6 @@ import cx from 'classnames';
 import type { KeyboardEvent, Dispatch, SetStateAction } from 'react';
 
 import { AddIcon } from 'assets/svgs';
-import { colors } from 'store/constants';
 import { categoryListState } from 'components/TodoBoard/_states';
 import { useEditingItem } from 'components/TodoBoard/_hooks/useEditingItem';
 import { useInputChange } from 'hooks/useInputChange';

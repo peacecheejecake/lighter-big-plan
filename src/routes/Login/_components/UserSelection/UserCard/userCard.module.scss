@@ -1,0 +1,68 @@
+@use 'styles/constants/colors';
+
+.wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100px;
+  height: 115px;
+  padding: 0 5px;
+  margin: 0 4px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 150ms;
+
+  .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80px;
+    height: 80px;
+
+    svg {
+      fill: colors.$GRAY0;
+      transform: scale(1.1);
+    }
+  }
+
+  .name {
+    width: 100%;
+    margin-bottom: 16px;
+    overflow: hidden;
+    color: colors.$GRAY0;
+    text-align: center;
+    text-overflow: ellipsis;
+    cursor: pointer;
+
+    &:not(:focus) {
+      user-select: none;
+    }
+  }
+
+  .edit {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(colors.$GRAY9, 82%);
+    border-radius: inherit;
+    transition: 100ms;
+
+    svg {
+      fill: colors.$GRAY5;
+    }
+  }
+
+  &:hover {
+    background-color: rgba(colors.$GRAY0, 5%);
+    transform: scale(1.1);
+
+    // .edit svg {
+    //   fill: colors.$GRAY0;
+    // }
+
+    .edit {
+      opacity: 0;
+    }
+  }
+}

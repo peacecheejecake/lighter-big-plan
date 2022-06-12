@@ -1,0 +1,45 @@
+@use 'styles/constants/colors';
+@use 'styles/constants/levels';
+
+.wrapper {
+  position: absolute;
+  bottom: -10px;
+  z-index: levels.$DROPDOWN;
+  overflow: hidden;
+  border: 1px solid colors.$GRAY5;
+  border-radius: 3px;
+  transform-origin: top center;
+
+  .item {
+    padding: 5px 10px;
+
+    button {
+      font-size: 16px;
+      transition: 100ms;
+    }
+  }
+}
+
+.darkMode {
+  background-color: colors.$BG_DARK;
+
+  .item button {
+    color: colors.$GRAY0;
+  }
+
+  .item:hover {
+    background-color: rgba(colors.$GRAY0, 8%);
+  }
+}
+
+.lightMode {
+  background-color: colors.$BG_W;
+
+  .item button {
+    color: colors.$GRAY9;
+  }
+
+  .item:hover {
+    background-color: rgba(colors.$GRAY9, 8%);
+  }
+}
