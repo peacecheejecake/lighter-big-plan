@@ -42,11 +42,11 @@ export default function UserManagement() {
       <div className={styles.content}>
         <Description title="사용자 정보 수정" />
         <form action="" onSubmit={handleSubmit}>
-          <div className={styles.formRow}>
+          <fieldset className={styles.formRow}>
             <label htmlFor="name">사용자 이름</label>
             <input id="name" type="text" onChange={handleChangeName} value={name} placeholder="사용자 이름" />
-          </div>
-          <div className={styles.formRow}>
+          </fieldset>
+          <fieldset className={styles.formRow}>
             <label htmlFor="password">비밀번호</label>
             <input
               id="password"
@@ -55,8 +55,8 @@ export default function UserManagement() {
               value={password}
               placeholder="비밀번호"
             />
-          </div>
-          <div className={styles.formRow}>
+          </fieldset>
+          <fieldset className={styles.formRow}>
             <label htmlFor="passwordCheck">비밀번호 확인</label>
             <input
               id="passwordCheck"
@@ -65,15 +65,15 @@ export default function UserManagement() {
               value={passwordCheck}
               placeholder="비밀번호"
             />
-          </div>
-          <div className={styles.submitButtons}>
+          </fieldset>
+          <fieldset className={styles.submitButtons}>
             <button type="button" onClick={handleClickBack} className={styles.back}>
               <ArrowBackIcon />
             </button>
             <button type="submit" className={styles.submit}>
               <CheckIcon />
             </button>
-          </div>
+          </fieldset>
         </form>
       </div>
     </div>

@@ -5,15 +5,17 @@ import cx from 'classnames';
 import { AddIcon, CloseIcon, EditIcon } from 'assets/svgs';
 import { useRecoil } from 'hooks';
 import { userListState } from 'store/states/userListState';
+import Description from '../_common/Description';
 import UserCard from './UserCard';
 import AskPassword from '../AskPassword';
+// import NewUser from '../../../NewUser';
 import styles from './userSelection.module.scss';
-import Description from '../_common/Description';
 
 export default function UserSelection() {
   const [userList] = useRecoil(userListState);
   const [editable, toggleEditable] = useReducer((prev) => !prev, false);
   const [selectedUser, setSelectedUser] = useState<null | User>(null);
+  // const [addUser, setAddUser] = useState(false);
 
   const IconForEdit = editable ? CloseIcon : EditIcon;
 
@@ -25,7 +27,7 @@ export default function UserSelection() {
           {userList.map((user) => (
             <UserCard user={user} setSelectedUser={setSelectedUser} editable={editable} key={`user-card-${user.id}`} />
           ))}
-          <Link className={styles.add} to="newUser">
+          <Link className={styles.add} to="/new-user">
             <AddIcon />
           </Link>
         </div>
@@ -39,6 +41,7 @@ export default function UserSelection() {
         </button>
       </div>
       {selectedUser && <AskPassword user={selectedUser} setSelectedUser={setSelectedUser} />}
+      {/* {addUser && <AddUser setAddUser={setAddUser} />} */}
     </>
   );
 }

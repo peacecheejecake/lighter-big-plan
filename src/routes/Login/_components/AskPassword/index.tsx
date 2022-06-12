@@ -1,4 +1,4 @@
-import { FormEvent, useEffect } from 'react';
+import { FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import type { Dispatch, SetStateAction } from 'react';
