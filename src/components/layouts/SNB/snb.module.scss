@@ -5,7 +5,6 @@
   position: relative;
   height: 100vh;
   background-color: colors.$WHITE;
-  transition: 150ms;
 
   .snbMenu {
     position: relative;
@@ -22,7 +21,6 @@
     width: 10px;
     height: calc(100% - 80px);
     cursor: pointer;
-    transition: 150ms;
 
     .folder {
       position: absolute;
@@ -39,7 +37,6 @@
       border: 1px solid colors.$GRAY5;
       border-radius: 50%;
       opacity: 0;
-      transition: 150ms;
     }
 
     &:hover {
