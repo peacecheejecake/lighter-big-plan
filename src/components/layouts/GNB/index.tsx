@@ -14,7 +14,6 @@ import UserDropdown from './_components/UserDropdown';
 export default function GNB() {
   const [darkMode, setDarkMode] = useRecoil(darkModeState);
   const [user] = useRecoil(userState);
-  // const [isUserOpen, toggleIsUserOpen] = useReducer((prev) => !prev, false);
   const [isUserOpen, setIsUserOpen, userRef] = useClickOuter<HTMLDivElement>();
 
   const toggleIsUserOpen = () => {

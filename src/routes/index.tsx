@@ -34,9 +34,7 @@ export default function Routes() {
   ) : (
     <>
       <Route path="login" element={<Login />} />
-      <Route path="user-nanagement">
-        <Route path=":userId" element={<UserManagement />} />
-      </Route>
+      <Route path="user-management/:userId" element={<UserManagement />} />
       <Route path="*" element={<Navigate replace to="/login" />} />
     </>
   );

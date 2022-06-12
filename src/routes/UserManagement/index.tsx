@@ -1,7 +1,9 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import { useInputChange, useRecoil } from 'hooks';
 import { userListState } from 'store/states/userListState';
-import { ArrowBackIcon } from 'assets/svgs';
+import { ArrowBackIcon, CheckIcon } from 'assets/svgs';
+import Description from 'routes/Login/_components/_common/Description';
+import { FormEvent } from 'react';
 import styles from './userManagement.module.scss';
 
 export default function UserManagement() {
@@ -24,22 +26,22 @@ export default function UserManagement() {
     navigate('..');
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
     setUserList((prev) =>
       prev.map((listUser) =>
         listUser.id === Number(userId) && password === passwordCheck ? { id: Number(userId), name, password } : listUser
       )
     );
+    navigate('..');
   };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        <button type="button" onClick={handleClickBack} className={styles.back}>
-          <ArrowBackIcon />
-          <span> 뒤로</span>
-        </button>
-        <form action="" method="POST" onSubmit={handleSubmit}>
+        <Description title="사용자 정보 수정" />
+        <form action="" onSubmit={handleSubmit}>
           <div className={styles.formRow}>
             <label htmlFor="name">사용자 이름</label>
             <input id="name" type="text" onChange={handleChangeName} value={name} placeholder="사용자 이름" />
@@ -64,9 +66,14 @@ export default function UserManagement() {
               placeholder="비밀번호"
             />
           </div>
-          <button type="submit" className={styles.submit}>
-            확인
-          </button>
+          <div className={styles.submitButtons}>
+            <button type="button" onClick={handleClickBack} className={styles.back}>
+              <ArrowBackIcon />
+            </button>
+            <button type="submit" className={styles.submit}>
+              <CheckIcon />
+            </button>
+          </div>
         </form>
       </div>
     </div>

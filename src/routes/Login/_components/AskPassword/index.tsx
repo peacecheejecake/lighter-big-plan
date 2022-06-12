@@ -38,10 +38,6 @@ export default function AskPassword({ user, setSelectedUser }: AskPasswordProps)
   return (
     <div className={styles.wrapper}>
       <div className={styles.content}>
-        <button type="button" onClick={handleClickBack} className={styles.back}>
-          <ArrowBackIcon />
-          <span> 뒤로</span>
-        </button>
         <Description title="비밀번호를 입력하세요." />
         <input
           type="password"
@@ -50,6 +46,10 @@ export default function AskPassword({ user, setSelectedUser }: AskPasswordProps)
           value={password}
           placeholder="비밀번호"
         />
+        <button type="button" onClick={handleClickBack} className={styles.back}>
+          <ArrowBackIcon />
+          <span> 뒤로</span>
+        </button>
       </div>
     </div>
   );
