@@ -7,7 +7,6 @@
   margin: 40px 20px;
   overflow: scroll;
   border-radius: 30px;
-  // border: 1px solid colors.$GRAY5;
 
   .title {
     display: flex;
@@ -48,7 +47,7 @@
 
 .darkMode {
   color: colors.$GRAY0;
-  background-color: colors.$GRAY9;
+  background-color: colors.$BG_DARK;
 
   .addIcon {
     fill: colors.$GRAY0;
