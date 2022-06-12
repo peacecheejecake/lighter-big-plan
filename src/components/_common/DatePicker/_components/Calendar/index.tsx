@@ -10,7 +10,7 @@ import { DropIcon } from 'assets/svgs';
 import { toYearMonth } from 'services/date';
 import { useCalendarBounds } from 'hooks/useCalendarBounds';
 import { useEditingItem } from 'components/TodoBoard/_hooks/useEditingItem';
-import { useExpandDirection } from 'components/TodoBoard/TodoItem/_hooks/useExpandDirection';
+import { useExpandDirection } from 'components/TodoBoard/_components/TodoItem/_hooks/useExpandDirection';
 import { darkModeState } from 'store/states/themeState';
 import styles from './calendar.module.scss';
 
