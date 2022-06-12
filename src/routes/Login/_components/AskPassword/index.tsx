@@ -1,7 +1,7 @@
 import { FormEvent, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-import type { Dispatch, SetStateAction, KeyboardEvent } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 
 import { useInputChange, useRecoil } from 'hooks';
 import { userState } from 'store/states/userState';
@@ -14,12 +14,10 @@ export default function AskPassword({ user, setSelectedUser }: AskPasswordProps)
   const [, setUser] = useRecoil(userState);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!user.password) {
-      setUser(user);
-      navigate('/');
-    }
-  }, [user, setUser, navigate]);
+  if (!user.password) {
+    setUser(user);
+    navigate('..');
+  }
 
   const handleClickBack = () => {
     setSelectedUser(null);
@@ -30,7 +28,7 @@ export default function AskPassword({ user, setSelectedUser }: AskPasswordProps)
 
     if (password === user.password) {
       setUser(user);
-      navigate('/');
+      navigate('..');
     }
   };
 
