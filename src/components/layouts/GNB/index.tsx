@@ -1,8 +1,7 @@
-import { useReducer } from 'react';
 import { Link } from 'react-router-dom';
 import cx from 'classnames';
 
-import { useRecoil } from 'hooks';
+import { useClickOuter, useRecoil } from 'hooks';
 import { darkModeState } from 'store/states/themeState';
 import { userState } from 'store/states/userState';
 import logoInvert from 'assets/images/logo_invert.png';
@@ -14,7 +13,11 @@ import UserDropdown from './_components/UserDropdown';
 export default function GNB() {
   const [darkMode, setDarkMode] = useRecoil(darkModeState);
   const [user] = useRecoil(userState);
-  const [isUserOpen, toggleIsUserOpen] = useReducer((prev) => !prev, false);
+  const [isUserOpen, setIsUserOpen, userRef] = useClickOuter<HTMLDivElement>();
+
+  const toggleIsUserOpen = () => {
+    setIsUserOpen((prev) => !prev);
+  };
 
   const ThemeIcon = darkMode ? DarkModeIcon : LightModeIcon;
   const logoSrc = darkMode ? logoInvert : logo;
@@ -34,7 +37,7 @@ export default function GNB() {
         <button type="button" onClick={toggleDarkMode} className={styles.themeButton}>
           <ThemeIcon className={styles.themeIcon} />
         </button>
-        <div className={styles.user}>
+        <div className={styles.user} ref={userRef}>
           <button type="button" className={styles.username} onClick={toggleIsUserOpen}>
             {(user as User).name}
           </button>

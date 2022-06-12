@@ -21,7 +21,7 @@ export const prepareDummy = async () => {
       notes: '',
       createdAt: now,
       updatedAt: now,
-      categoryId: Math.round(Math.random()),
+      categoryId: Math.round(Math.random()) - 1,
     } as Item;
   });
 };
