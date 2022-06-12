@@ -1,5 +1,7 @@
-import { Dispatch, SetStateAction, useEffect } from 'react';
+import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+
+import type { Dispatch, SetStateAction, KeyboardEvent } from 'react';
 
 import { useInputChange, useRecoil } from 'hooks';
 import { userState } from 'store/states/userState';
@@ -13,14 +15,24 @@ export default function AskPassword({ user, setSelectedUser }: AskPasswordProps)
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!user.password || password === user.password) {
+    if (!user.password) {
       setUser(user);
       navigate('/');
     }
-  }, [password, navigate, user, setUser]);
+  }, [user, setUser, navigate]);
 
   const handleClickBack = () => {
     setSelectedUser(null);
+  };
+
+  const handleKeydown = (event: KeyboardEvent<HTMLInputElement>) => {
+    switch (event.key) {
+      case 'Enter':
+        if (password === user.password) {
+          setUser(user);
+          navigate('/');
+        }
+    }
   };
 
   return (
@@ -31,7 +43,13 @@ export default function AskPassword({ user, setSelectedUser }: AskPasswordProps)
           <span> 뒤로</span>
         </button>
         <Description title="비밀번호를 입력하세요." />
-        <input type="password" onChange={handleChangePassword} value={password} placeholder="비밀번호" />
+        <input
+          type="password"
+          onChange={handleChangePassword}
+          onKeyDown={handleKeydown}
+          value={password}
+          placeholder="비밀번호"
+        />
       </div>
     </div>
   );

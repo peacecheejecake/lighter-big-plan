@@ -10,6 +10,7 @@ import Dashboard from './Dashboard';
 import Todos from './Todos';
 import Notes from './Notes';
 import styles from './routes.module.scss';
+import UserManagement from './UserManagement';
 
 export default function Routes() {
   const [, setItemList] = useRecoil(itemListState);
@@ -33,6 +34,9 @@ export default function Routes() {
   ) : (
     <>
       <Route path="login" element={<Login />} />
+      <Route path="user-nanagement">
+        <Route path=":userId" element={<UserManagement />} />
+      </Route>
       <Route path="*" element={<Navigate replace to="/login" />} />
     </>
   );
