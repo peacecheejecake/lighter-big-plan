@@ -1,4 +1,6 @@
 import { useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+
 import type { FormEvent, MouseEvent } from 'react';
 
 import { useInputChange, useRecoil } from 'hooks';
@@ -12,8 +14,13 @@ export default function NewUser() {
   const [passwordCheck, , handleChangePasswordCheck] = useInputChange<HTMLInputElement>();
 
   const [, setUserList] = useRecoil(userListState);
+  const [warning, setWarning] = useState('');
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setWarning(password === passwordCheck ? ' ' : '비밀번호 확인이 다릅니다.');
+  }, [password, passwordCheck]);
 
   const handleClickBack = (event: MouseEvent<HTMLButtonElement>) => {
     event.preventDefault();
@@ -49,12 +56,13 @@ export default function NewUser() {
             <label htmlFor="password" className={styles.passwordDesc}>
               비밀번호를 입력하세요.
               <input
-                id="name"
+                id="password"
                 type="password"
                 value={password}
                 onChange={handleChangePassword}
                 className={styles.nameInput}
                 placeholder="입력하지 않으면 비밀번호 없이 로그인"
+                autoComplete="off"
               />
             </label>
           )}
@@ -62,7 +70,7 @@ export default function NewUser() {
             <label htmlFor="passwordCheck" className={styles.passwordCheckDesc}>
               비밀번호 확인을 입력하세요.
               <input
-                id="name"
+                id="passwordCheck"
                 type="password"
                 value={passwordCheck}
                 onChange={handleChangePasswordCheck}
@@ -70,6 +78,7 @@ export default function NewUser() {
               />
             </label>
           )}
+          <p className={styles.warning}>{warning}</p>
           <div className={styles.submitButtons}>
             <button type="button" onClick={handleClickBack} className={styles.back}>
               <ArrowBackIcon />
