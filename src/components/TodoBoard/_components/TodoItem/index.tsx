@@ -1,21 +1,26 @@
 import { useEffect, useRef, useMemo } from 'react';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import cx from 'classnames';
 
 import type { ChangeEvent, KeyboardEvent } from 'react';
 
+import {
+  categoryListState,
+  editingItemIdxState,
+  itemListState,
+  selectedItemIdxState,
+} from 'components/TodoBoard/_states';
+import { useInputChange, useRecoil, useDarkMode } from 'hooks';
 import { CheckIcon } from 'assets/svgs';
-import { editingItemIdxState, itemListState, selectedItemIdxState } from 'components/TodoBoard/_states';
-import { useInputChange } from 'hooks/useInputChange';
-import { darkModeState } from 'store/states/themeState';
 import ItemOptionBar from './_components/ItemOptionBar';
 import styles from './todoItem.module.scss';
 
 export default function TodoItem({ item }: TodoItemProps) {
-  const [editingItemIdx, setEditingItemIdx] = useRecoilState(editingItemIdxState);
-  const [selectedItemIdx, setSelectedItemIdx] = useRecoilState(selectedItemIdxState);
-  const setItemList = useSetRecoilState(itemListState);
-  const darkMode = useRecoilValue(darkModeState);
+  const [editingItemIdx, setEditingItemIdx] = useRecoil(editingItemIdxState);
+  const [selectedItemIdx, setSelectedItemIdx] = useRecoil(selectedItemIdxState);
+  const [, setItemList] = useRecoil(itemListState);
+  const [categoryList] = useRecoil(categoryListState);
+
+  const [, themeClassName] = useDarkMode();
 
   const [title, setTitle, handleChangeTitle] = useInputChange<HTMLInputElement>(item.title);
   const [notes, setNotes, handleChangeNotes] = useInputChange<HTMLTextAreaElement>(item.notes);
@@ -75,11 +80,9 @@ export default function TodoItem({ item }: TodoItemProps) {
     }
   };
 
-  const themeClassName = darkMode ? styles.darkMode : styles.lightMode;
-
   return (
     <li
-      className={cx(styles.todoItem, themeClassName, {
+      className={cx(styles.todoItem, styles[themeClassName], {
         [styles.selectedItem]: !isEditing && isSelected,
         [styles.editor]: isEditing,
       })}
@@ -89,6 +92,7 @@ export default function TodoItem({ item }: TodoItemProps) {
         <label htmlFor={`checkbox-${item.id}`} className={styles.checkmark} ref={checkRef}>
           <CheckIcon className={styles.icon} />
         </label>
+        <div className={styles.categoryIndicator} style={{ backgroundColor: categoryList[item.categoryId].color }} />
         <div
           className={cx(styles.detail, { [styles.open]: isEditing })}
           onKeyDown={handleKeydown}

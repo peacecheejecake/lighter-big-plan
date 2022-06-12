@@ -18,6 +18,13 @@
     }
   }
 
+  .categoryIndicator {
+    width: 10px;
+    height: 10px;
+    margin-right: 5px;
+    border-radius: 50%;
+  }
+
   form {
     display: flex;
     align-items: center;
@@ -29,7 +36,7 @@
       justify-content: center;
       width: 16px;
       height: 16px;
-      margin-right: 10px;
+      margin-right: 15px;
       cursor: pointer;
       border: 1px solid colors.$GRAY4;
       border-radius: 3px;

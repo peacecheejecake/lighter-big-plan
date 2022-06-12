@@ -1,5 +1,4 @@
-import { useState, useEffect, useRef } from 'react';
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRef } from 'react';
 import cx from 'classnames';
 
 import type { KeyboardEvent, Dispatch, SetStateAction } from 'react';
@@ -7,32 +6,27 @@ import type { KeyboardEvent, Dispatch, SetStateAction } from 'react';
 import { AddIcon } from 'assets/svgs';
 import { categoryListState } from 'components/TodoBoard/_states';
 import { useEditingItem } from 'components/TodoBoard/_hooks/useEditingItem';
-import { useInputChange } from 'hooks/useInputChange';
-import { useExpandDirection } from 'components/TodoBoard/TodoItem/_hooks/useExpandDirection';
-import { darkModeState } from 'store/states/themeState';
+import { useInputChange, useDarkMode, useRecoil } from 'hooks';
+import { useExpandDirection } from 'components/TodoBoard/_components/TodoItem/_hooks/useExpandDirection';
 import ColorIndicator from './ColorIndicator';
 import styles from './categoryMenu.module.scss';
 
 export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
-  const darkMode = useRecoilValue(darkModeState);
+  const [, themeClassName] = useDarkMode();
+  const [categories, setCategories] = useRecoil(categoryListState);
 
-  const [, setItem] = useEditingItem();
-  const [categories, setCategories] = useRecoilState(categoryListState);
-
-  const [topIdx, setTopIdx] = useState(0);
   const [inputValue, setInputValue, handleInputChange] = useInputChange<HTMLInputElement>();
-  const inputRef = useRef<HTMLInputElement>(null);
-
   const { containerRef, expandToUp } = useExpandDirection<HTMLUListElement>();
+  const [, setItem] = useEditingItem();
 
-  useEffect(() => {
-    setItem((prev) => ({ ...prev, categoryId: topIdx }));
-  }, [topIdx, setItem, setIsOpen]);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   const handleClickItem = (event: React.MouseEvent<HTMLElement>) => {
     const { dropIdx } = event.currentTarget.dataset;
     if (dropIdx === undefined) return;
-    setTopIdx(Number(dropIdx));
+
+    setItem((prev) => ({ ...prev, categoryId: Number(dropIdx) }));
+
     setTimeout(() => {
       setIsOpen(false);
     }, 0);
@@ -63,10 +57,8 @@ export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
     setInputValue('');
   };
 
-  const themeClassName = darkMode ? styles.darkMode : styles.lightMode;
-
   return (
-    <ul className={cx(styles.dropMenu, themeClassName, { [styles.expandToUp]: expandToUp })} ref={containerRef}>
+    <ul className={cx(styles.dropMenu, styles[themeClassName], { [styles.expandToUp]: expandToUp })} ref={containerRef}>
       {categories.map(({ color, name }, idx) => {
         const key = `className-${name}-${idx}`;
 
@@ -74,13 +66,12 @@ export default function CategoryMenu({ setIsOpen }: CategoryMenuProps) {
           <li
             className={cx(styles.menu, {
               [styles.roundTop]: idx === 0,
-              // [styles.roundBottom]: idx === categories.length - 2,
             })}
             key={key}
           >
             <div
               className={styles.itemWrapper}
-              data-drop-idx={idx >= topIdx ? idx + 1 : idx}
+              data-drop-idx={idx}
               onClick={handleClickItem}
               role="menuitem"
               tabIndex={-1}

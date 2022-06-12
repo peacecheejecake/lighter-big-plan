@@ -2,11 +2,11 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
 import cx from 'classnames';
 
-import TodoItem from 'components/TodoBoard/TodoItem';
+import TodoItem from 'components/TodoBoard/_components/TodoItem';
 import { itemListState, editingItemIdxState, selectedItemIdxState } from 'components/TodoBoard/_states';
 import { darkModeState } from 'store/states/themeState';
 import { AddIcon } from 'assets/svgs';
-import { createNewItem } from './TodoItem/_services';
+import { createNewItem } from './_components/TodoItem/_services';
 import styles from './todoBoard.module.scss';
 import { boundingRectState } from './_states/boundingRectState';
 
