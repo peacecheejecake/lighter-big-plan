@@ -80,6 +80,8 @@ export default function TodoItem({ item }: TodoItemProps) {
     }
   };
 
+  const indicatorColor = item.categoryId === -1 ? 'transparent' : categoryList[item.categoryId].color;
+
   return (
     <li
       className={cx(styles.todoItem, styles[themeClassName], {
@@ -92,7 +94,7 @@ export default function TodoItem({ item }: TodoItemProps) {
         <label htmlFor={`checkbox-${item.id}`} className={styles.checkmark} ref={checkRef}>
           <CheckIcon className={styles.icon} />
         </label>
-        <div className={styles.categoryIndicator} style={{ backgroundColor: categoryList[item.categoryId].color }} />
+        <div className={styles.categoryIndicator} style={{ backgroundColor: indicatorColor }} />
         <div
           className={cx(styles.detail, { [styles.open]: isEditing })}
           onKeyDown={handleKeydown}

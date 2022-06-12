@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
-import { useRecoilValue, useRecoilState, useSetRecoilState } from 'recoil';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import cx from 'classnames';
 
 import TodoItem from 'components/TodoBoard/_components/TodoItem';
 import { itemListState, editingItemIdxState, selectedItemIdxState } from 'components/TodoBoard/_states';
-import { darkModeState } from 'store/states/themeState';
+import { useDarkMode } from 'hooks';
 import { AddIcon } from 'assets/svgs';
 import { createNewItem } from './_components/TodoItem/_services';
 import styles from './todoBoard.module.scss';
@@ -15,7 +15,7 @@ export default function TodoBoard() {
   const [editingItemIdx, setEditingItemIdx] = useRecoilState(editingItemIdxState);
   const [selectedItemIdx, setSelectedItemIdx] = useRecoilState(selectedItemIdxState);
   const setBoundingRect = useSetRecoilState(boundingRectState);
-  const darkMode = useRecoilValue(darkModeState);
+  const [, themeClassName] = useDarkMode();
 
   const [newItemIdx, setNewItemIdx] = useState(-1);
 
@@ -98,7 +98,7 @@ export default function TodoBoard() {
   }, [ref, setBoundingRect, itemList]);
 
   return (
-    <article className={cx(styles.card, darkMode ? styles.darkMode : styles.lightMode)}>
+    <article className={cx(styles.card, styles[themeClassName])}>
       <p className={styles.title}>
         Quick Todo
         <AddIcon className={styles.addIcon} onClick={handleClickAdd} ref={addRef} />

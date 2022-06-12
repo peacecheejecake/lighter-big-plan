@@ -8,6 +8,6 @@ export const createNewItem = (id: number): Item => {
     notes: '',
     createdAt: dayjs(),
     updatedAt: dayjs(),
-    categoryId: 0,
+    categoryId: -1,
   };
 };
