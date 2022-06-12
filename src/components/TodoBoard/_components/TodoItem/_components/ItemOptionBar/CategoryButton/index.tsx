@@ -1,8 +1,6 @@
 import { useRecoilValue } from 'recoil';
 import cx from 'classnames';
 
-import type { MouseEvent } from 'react';
-
 import { CategoryIcon } from 'assets/svgs';
 import { useClickOuter } from 'hooks/useClickOuter';
 import { darkModeState } from 'store/states/themeState';
