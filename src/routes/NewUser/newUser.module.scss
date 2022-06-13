@@ -62,40 +62,40 @@
       transition: 100ms;
     }
 
-    .submitButtons {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 38px;
+    // .submitButtons {
+    //   display: flex;
+    //   align-items: center;
+    //   justify-content: center;
+    //   margin-top: 38px;
 
-      button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
+    //   button {
+    //     display: flex;
+    //     align-items: center;
+    //     justify-content: center;
 
-        svg {
-          margin: 0 10px;
-          margin-right: 10px;
-          fill: colors.$GRAY5;
-          transition: 100ms;
-          transform: scale(1.4);
-        }
+    //     svg {
+    //       margin: 0 10px;
+    //       margin-right: 10px;
+    //       fill: colors.$GRAY5;
+    //       transition: 100ms;
+    //       transform: scale(1.4);
+    //     }
 
-        span {
-          font-size: 16px;
-          color: colors.$GRAY5;
-        }
+    //     span {
+    //       font-size: 16px;
+    //       color: colors.$GRAY5;
+    //     }
 
-        &:hover {
-          svg {
-            fill: colors.$GRAY0;
-          }
+    //     &:hover {
+    //       svg {
+    //         fill: colors.$GRAY0;
+    //       }
 
-          span {
-            color: colors.$GRAY0;
-          }
-        }
-      }
-    }
+    //       span {
+    //         color: colors.$GRAY0;
+    //       }
+    //     }
+    //   }
+    // }
   }
 }

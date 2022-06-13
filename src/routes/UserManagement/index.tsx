@@ -1,9 +1,11 @@
 import { useNavigate, useParams } from 'react-router-dom';
+import type { FormEvent } from 'react';
+
 import { useInputChange, useRecoil } from 'hooks';
 import { userListState } from 'store/states/userListState';
-import { ArrowBackIcon, CheckIcon } from 'assets/svgs';
+// import { ArrowBackIcon, CheckIcon } from 'assets/svgs';
 import Description from 'routes/Login/_components/_common/Description';
-import { FormEvent } from 'react';
+import SubmitButtons from 'components/_common/SubmitButtons';
 import styles from './userManagement.module.scss';
 
 export default function UserManagement() {
@@ -22,9 +24,9 @@ export default function UserManagement() {
   const [password, , handleChangePassword] = useInputChange<HTMLInputElement>((user as User).password);
   const [passwordCheck, , handleChangePasswordCheck] = useInputChange<HTMLInputElement>((user as User).password);
 
-  const handleClickBack = () => {
-    navigate('..');
-  };
+  // const handleClickBack = () => {
+  //   navigate('..');
+  // };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -66,14 +68,7 @@ export default function UserManagement() {
               placeholder="비밀번호"
             />
           </fieldset>
-          <fieldset className={styles.submitButtons}>
-            <button type="button" onClick={handleClickBack} className={styles.back}>
-              <ArrowBackIcon />
-            </button>
-            <button type="submit" className={styles.submit}>
-              <CheckIcon />
-            </button>
-          </fieldset>
+          <SubmitButtons />
         </form>
       </div>
     </div>
