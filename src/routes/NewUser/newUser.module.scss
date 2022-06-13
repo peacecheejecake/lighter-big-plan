@@ -22,12 +22,14 @@
     justify-content: center;
 
     label {
+      position: relative;
       display: flex;
       flex-direction: column;
       align-items: baseline;
       color: colors.$GRAY7;
       text-align: right;
       transition: 100ms;
+      animation: fadeDown 300ms;
 
       &:focus-within {
         color: colors.$GRAY0;
@@ -61,5 +63,17 @@
       text-align: center;
       transition: 100ms;
     }
+  }
+}
+
+@keyframes fadeDown {
+  from {
+    top: -10px;
+    opacity: 0;
+  }
+
+  to {
+    top: 0;
+    opacity: 1;
   }
 }
