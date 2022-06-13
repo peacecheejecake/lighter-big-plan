@@ -8,14 +8,12 @@ import { userListState } from 'store/states/userListState';
 import Description from '../_common/Description';
 import UserCard from './UserCard';
 import AskPassword from '../AskPassword';
-// import NewUser from '../../../NewUser';
 import styles from './userSelection.module.scss';
 
 export default function UserSelection() {
   const [userList] = useRecoil(userListState);
   const [editable, toggleEditable] = useReducer((prev) => !prev, false);
   const [selectedUser, setSelectedUser] = useState<null | User>(null);
-  // const [addUser, setAddUser] = useState(false);
 
   const IconForEdit = editable ? CloseIcon : EditIcon;
 
@@ -41,7 +39,6 @@ export default function UserSelection() {
         </button>
       </div>
       {selectedUser && <AskPassword user={selectedUser} setSelectedUser={setSelectedUser} />}
-      {/* {addUser && <AddUser setAddUser={setAddUser} />} */}
     </>
   );
 }
