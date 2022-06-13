@@ -75,7 +75,7 @@
         transition: 150ms;
 
         &::selection {
-          all: unset;
+          background-color: none;
         }
       }
     }
@@ -174,55 +174,39 @@
 .lightMode {
   .title {
     color: colors.$GRAY9;
+
+    &::selection {
+      color: colors.$GRAY0;
+      background-color: colors.$GRAY9;
+    }
+
+    &:not(:focus) {
+      background-color: transparent;
+    }
   }
 
-  .open {
-    .title {
-      &::selection {
-        color: colors.$GRAY0;
-        background-color: colors.$BG_DARK;
-      }
-
-      &:focus {
-        background-color: rgba(colors.$WHITE, 80%);
-      }
-
-      &:not(:focus) {
-        background-color: transparent;
-      }
-    }
-
-    textarea:focus {
-      background-color: rgba(colors.$WHITE, 80%);
-    }
+  textarea::selection {
+    color: colors.$GRAY0;
+    background-color: colors.$GRAY9;
   }
 }
 
 .darkMode {
   .title {
     color: colors.$GRAY0;
+
+    &::selection {
+      color: colors.$GRAY9;
+      background-color: colors.$GRAY0;
+    }
+
+    &:not(:focus) {
+      background-color: transparent;
+    }
   }
 
-  .open {
-    .title {
-      color: colors.$GRAY0;
-
-      &::selection {
-        color: colors.$GRAY9;
-        background-color: colors.$GRAY0;
-      }
-
-      &:focus {
-        background-color: rgba(colors.$WHITE, 10%);
-      }
-
-      &:not(:focus) {
-        background-color: transparent;
-      }
-    }
-
-    textarea:focus {
-      background-color: rgba(colors.$WHITE, 10%);
-    }
+  textarea::selection {
+    color: colors.$GRAY9;
+    background-color: colors.$GRAY0;
   }
 }
