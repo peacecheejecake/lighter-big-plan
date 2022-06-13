@@ -45,7 +45,7 @@
       border-radius: 5px;
 
       &:focus {
-        border: 1px solid colors.$GRAY0;
+        border: 1.5px solid colors.$GRAY0;
       }
 
       &::selection {
@@ -61,41 +61,5 @@
       text-align: center;
       transition: 100ms;
     }
-
-    // .submitButtons {
-    //   display: flex;
-    //   align-items: center;
-    //   justify-content: center;
-    //   margin-top: 38px;
-
-    //   button {
-    //     display: flex;
-    //     align-items: center;
-    //     justify-content: center;
-
-    //     svg {
-    //       margin: 0 10px;
-    //       margin-right: 10px;
-    //       fill: colors.$GRAY5;
-    //       transition: 100ms;
-    //       transform: scale(1.4);
-    //     }
-
-    //     span {
-    //       font-size: 16px;
-    //       color: colors.$GRAY5;
-    //     }
-
-    //     &:hover {
-    //       svg {
-    //         fill: colors.$GRAY0;
-    //       }
-
-    //       span {
-    //         color: colors.$GRAY0;
-    //       }
-    //     }
-    //   }
-    // }
   }
 }

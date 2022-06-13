@@ -1,11 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
+import type { FormEvent } from 'react';
 
-import type { FormEvent, MouseEvent } from 'react';
-
-import { useInputChange, useRecoil } from 'hooks';
+import { useFocusOnMount, useInputChange, useRecoil } from 'hooks';
 import { userListState } from 'store/states/userListState';
-import { ArrowBackIcon, CheckIcon } from 'assets/svgs';
+import SubmitButtons from 'components/_common/SubmitButtons';
 import styles from './newUser.module.scss';
 
 export default function NewUser() {
@@ -16,17 +15,13 @@ export default function NewUser() {
   const [, setUserList] = useRecoil(userListState);
   const [warning, setWarning] = useState('');
 
+  const nameInputRef = useFocusOnMount<HTMLInputElement>();
+
   const navigate = useNavigate();
 
   useEffect(() => {
     setWarning(password === passwordCheck ? ' ' : '비밀번호 확인이 다릅니다.');
   }, [password, passwordCheck]);
-
-  const handleClickBack = (event: MouseEvent<HTMLButtonElement>) => {
-    event.preventDefault();
-
-    navigate('..', { replace: true });
-  };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -50,6 +45,7 @@ export default function NewUser() {
               onChange={handleChangeName}
               className={styles.nameInput}
               autoComplete="off"
+              ref={nameInputRef}
             />
           </label>
           {name && (
@@ -79,14 +75,7 @@ export default function NewUser() {
             </label>
           )}
           <p className={styles.warning}>{warning}</p>
-          <div className={styles.submitButtons}>
-            <button type="button" onClick={handleClickBack} className={styles.back}>
-              <ArrowBackIcon />
-            </button>
-            <button type="submit" className={styles.submit}>
-              <CheckIcon />
-            </button>
-          </div>
+          <SubmitButtons />
         </form>
       </div>
     </div>

@@ -1,11 +1,10 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import type { FormEvent } from 'react';
 
-import { useInputChange, useRecoil } from 'hooks';
+import { useInputChange, useRecoil, useFocusOnMount } from 'hooks';
 import { userListState } from 'store/states/userListState';
-// import { ArrowBackIcon, CheckIcon } from 'assets/svgs';
-import Description from 'routes/Login/_components/_common/Description';
 import SubmitButtons from 'components/_common/SubmitButtons';
+import Description from 'routes/Login/_components/_common/Description';
 import styles from './userManagement.module.scss';
 
 export default function UserManagement() {
@@ -24,9 +23,7 @@ export default function UserManagement() {
   const [password, , handleChangePassword] = useInputChange<HTMLInputElement>((user as User).password);
   const [passwordCheck, , handleChangePasswordCheck] = useInputChange<HTMLInputElement>((user as User).password);
 
-  // const handleClickBack = () => {
-  //   navigate('..');
-  // };
+  const inputRef = useFocusOnMount<HTMLInputElement>();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -44,12 +41,22 @@ export default function UserManagement() {
       <div className={styles.content}>
         <Description title="사용자 정보 수정" />
         <form action="" onSubmit={handleSubmit}>
-          <fieldset className={styles.formRow}>
-            <label htmlFor="name">사용자 이름</label>
-            <input id="name" type="text" onChange={handleChangeName} value={name} placeholder="사용자 이름" />
-          </fieldset>
-          <fieldset className={styles.formRow}>
-            <label htmlFor="password">비밀번호</label>
+          {/* <fieldset className={styles.formRow}> */}
+          <label htmlFor="name">
+            사용자 이름
+            <input
+              id="name"
+              type="text"
+              onChange={handleChangeName}
+              value={name}
+              placeholder="사용자 이름"
+              ref={inputRef}
+            />
+          </label>
+          {/* </fieldset> */}
+          {/* <fieldset className={styles.formRow}> */}
+          <label htmlFor="password">
+            비밀번호
             <input
               id="password"
               type="password"
@@ -57,17 +64,20 @@ export default function UserManagement() {
               value={password}
               placeholder="비밀번호"
             />
-          </fieldset>
-          <fieldset className={styles.formRow}>
-            <label htmlFor="passwordCheck">비밀번호 확인</label>
+          </label>
+          {/* </fieldset> */}
+          {/* <fieldset className={styles.formRow}> */}
+          <label htmlFor="passwordCheck">
+            비밀번호 확인
             <input
               id="passwordCheck"
               type="password"
               onChange={handleChangePasswordCheck}
               value={passwordCheck}
-              placeholder="비밀번호"
+              placeholder="비밀번호 확인"
             />
-          </fieldset>
+          </label>
+          {/* </fieldset> */}
           <SubmitButtons />
         </form>
       </div>

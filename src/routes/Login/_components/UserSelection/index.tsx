@@ -5,8 +5,8 @@ import cx from 'classnames';
 import { AddIcon, CloseIcon, EditIcon } from 'assets/svgs';
 import { useRecoil } from 'hooks';
 import { userListState } from 'store/states/userListState';
-import Description from '../_common/Description';
 import UserCard from './UserCard';
+import Description from '../_common/Description';
 import AskPassword from '../AskPassword';
 import styles from './userSelection.module.scss';
 
