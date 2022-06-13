@@ -73,16 +73,16 @@
         user-select: unset;
         border-radius: 3px;
         transition: 150ms;
-
-        &::selection {
-          background-color: none;
-        }
       }
     }
 
     .open {
       .title {
         cursor: auto;
+
+        // &::selection {
+        //   all: initial;
+        // }
       }
     }
   }
@@ -176,13 +176,14 @@
     color: colors.$GRAY9;
 
     &::selection {
-      color: colors.$GRAY0;
-      background-color: colors.$GRAY9;
-    }
-
-    &:not(:focus) {
+      color: colors.$GRAY9;
       background-color: transparent;
     }
+  }
+
+  .open .title::selection {
+    color: colors.$GRAY0;
+    background-color: colors.$GRAY9;
   }
 
   textarea::selection {
@@ -196,13 +197,14 @@
     color: colors.$GRAY0;
 
     &::selection {
-      color: colors.$GRAY9;
-      background-color: colors.$GRAY0;
-    }
-
-    &:not(:focus) {
+      color: colors.$GRAY0;
       background-color: transparent;
     }
+  }
+
+  .open .title::selection {
+    color: colors.$GRAY9;
+    background-color: colors.$GRAY0;
   }
 
   textarea::selection {
