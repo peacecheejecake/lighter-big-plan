@@ -38,7 +38,7 @@ export default function UserSelection() {
           <span>{editable ? '취소' : '수정하기'}</span>
         </button>
       </div>
-      {selectedUser && <AskPassword user={selectedUser} setSelectedUser={setSelectedUser} />}
+      {selectedUser && <AskPassword user={selectedUser} />}
     </>
   );
 }

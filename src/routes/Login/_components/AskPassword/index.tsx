@@ -1,7 +1,6 @@
-import { FormEvent } from 'react';
+import { useCallback, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-
-import type { Dispatch, SetStateAction } from 'react';
+import type { FormEvent } from 'react';
 
 import { useFocusOnMount, useInputChange, useRecoil } from 'hooks';
 import { userState } from 'store/states/userState';
@@ -9,12 +8,19 @@ import SubmitButtons from 'components/_common/SubmitButtons';
 import Description from '../_common/Description';
 import styles from './askPassword.module.scss';
 
-export default function AskPassword({ user, setSelectedUser }: AskPasswordProps) {
-  const [password, , handleChangePassword] = useInputChange<HTMLInputElement>();
+export default function AskPassword({ user }: AskPasswordProps) {
   const [, setUser] = useRecoil(userState);
-  const navigate = useNavigate();
 
+  const [warning, setWarning] = useState('');
+
+  const navigate = useNavigate();
   const inputRef = useFocusOnMount<HTMLInputElement>();
+
+  const resetWarning = useCallback(() => {
+    setWarning('');
+  }, []);
+
+  const [password, , handleChangePassword] = useInputChange<HTMLInputElement>('', resetWarning);
 
   if (!user.password) {
     setUser(user);
@@ -27,7 +33,13 @@ export default function AskPassword({ user, setSelectedUser }: AskPasswordProps)
     if (password === user.password) {
       setUser(user);
       navigate('..');
+    } else {
+      setWarning('비밀번호가 일치하지 않습니다.');
     }
+  };
+
+  const handleFocusPassword = () => {
+    setWarning('');
   };
 
   return (
@@ -38,12 +50,14 @@ export default function AskPassword({ user, setSelectedUser }: AskPasswordProps)
           <input
             type="password"
             onChange={handleChangePassword}
+            onFocus={handleFocusPassword}
             value={password}
             placeholder="입력 후 엔터 혹은 아래 버튼을 누르세요."
             ref={inputRef}
           />
+          <p className={styles.warning}>{warning}</p>
+          <SubmitButtons />
         </form>
-        <SubmitButtons />
       </div>
     </div>
   );
@@ -51,5 +65,4 @@ export default function AskPassword({ user, setSelectedUser }: AskPasswordProps)
 
 interface AskPasswordProps {
   user: User;
-  setSelectedUser: Dispatch<SetStateAction<null | User>>;
 }

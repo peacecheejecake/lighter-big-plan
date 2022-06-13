@@ -8,19 +8,19 @@ import SubmitButtons from 'components/_common/SubmitButtons';
 import styles from './newUser.module.scss';
 
 export default function NewUser() {
+  const [, setUserList] = useRecoil(userListState);
+  const [warning, setWarning] = useState('');
+
   const [name, , handleChangeName] = useInputChange<HTMLInputElement>();
   const [password, , handleChangePassword] = useInputChange<HTMLInputElement>();
   const [passwordCheck, , handleChangePasswordCheck] = useInputChange<HTMLInputElement>();
-
-  const [, setUserList] = useRecoil(userListState);
-  const [warning, setWarning] = useState('');
 
   const nameInputRef = useFocusOnMount<HTMLInputElement>();
 
   const navigate = useNavigate();
 
   useEffect(() => {
-    setWarning(password === passwordCheck ? ' ' : '비밀번호 확인이 다릅니다.');
+    setWarning(passwordCheck && password && password !== passwordCheck ? '비밀번호 확인이 다릅니다.' : '');
   }, [password, passwordCheck]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
