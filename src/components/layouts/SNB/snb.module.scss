@@ -5,6 +5,7 @@
   position: relative;
   height: 100vh;
   background-color: colors.$WHITE;
+  transition: width 100ms;
 
   .snbMenu {
     position: relative;
