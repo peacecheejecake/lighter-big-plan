@@ -20,6 +20,11 @@
 
     .logo img {
       height: 80px;
+      user-select: none;
+
+      &::selection {
+        all: unset;
+      }
     }
   }
 
