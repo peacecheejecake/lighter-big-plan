@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import type { FormEvent } from 'react';
 
@@ -22,10 +22,12 @@ export default function AskPassword({ user }: AskPasswordProps) {
 
   const [password, , handleChangePassword] = useInputChange<HTMLInputElement>('', resetWarning);
 
-  if (!user.password) {
-    setUser(user);
-    navigate('..');
-  }
+  useEffect(() => {
+    if (!user.password) {
+      setUser(user);
+      navigate('..');
+    }
+  }, [user, setUser, navigate]);
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
